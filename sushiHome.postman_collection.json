@@ -1,0 +1,574 @@
+{
+	"info": {
+		"_postman_id": "0e571ac2-b3ac-42a5-b726-3aacc84634e2",
+		"name": "sushiHome",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "GET ALL CATEGORIES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/category",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET CATEGORY BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/category/5c49d69194a1e8ca48d9c923",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"5c49d69194a1e8ca48d9c923"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL INACTIVE CATEGORIES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/category/inactive/all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"inactive",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST CATEGORY",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Entradas\",\n  \"imageUrl\": \"https://bit.ly/2Tcz9kz\",\n  \"isVisible\": true,\n  \"isActive\": true\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/category",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT CATEGORY",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Entradas\",\n  \"isVisible\": true\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/category/5c49ea07126c7fd37142bdd0",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"5c49ea07126c7fd37142bdd0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE CATEGORY",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/category/5c49e8777f5502d292ba9913",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"5c49e8777f5502d292ba9913"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEEP DELETE CATEGORY",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/category/delete/5c49e80c6baba5d1dfc7a3ba",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"delete",
+								"5c49e80c6baba5d1dfc7a3ba"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "GET ALL PRODUCT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/product",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PRODUCT BY CATEGORY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/product/by/category/5c49d69194a1e8ca48d9c923",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"by",
+								"category",
+								"5c49d69194a1e8ca48d9c923"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PRODUCT BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/product/5c4a1c5459e06ce1d1052039",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"5c4a1c5459e06ce1d1052039"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL INACTIVE PRODUCTS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/product/inactive/all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"inactive",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST PRODUCT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"categoryId\": \"5c49d69194a1e8ca48d9c923\",\n  \"name\": \"Papa\",\n  \"description\": \"Este es muy rico también\",\n  \"units\": 5,\n  \"price\": 130,\n  \"imageUrl\": \"https://bit.ly/2CIWHGJ\",\n  \"isVisible\": true\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/product",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT PRODUCT",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Rabas\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/product/5c4a1c5459e06ce1d1052039",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"5c4a1c5459e06ce1d1052039"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE PRODUCT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/product/5c4a1c5459e06ce1d1052039",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"5c4a1c5459e06ce1d1052039"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEEP DELETE PRODUCT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/product/delete/5c49e80c6baba5d1dfc7a3ba",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"delete",
+								"5c49e80c6baba5d1dfc7a3ba"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Branch",
+			"item": [
+				{
+					"name": "GET ALL BRANCHES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/branch",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"branch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BRANCH BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/branch/5c4a0fcefbc2b8de3d5f5f8a",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"branch",
+								"5c4a0fcefbc2b8de3d5f5f8a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL INACTIVE BRANCHES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/branch/inactive/all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"branch",
+								"inactive",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST BRANCH",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Rosario\",\n  \"hours\": {\n    \"monday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"tuesday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"wednesday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"thursday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"friday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"saturday\": {\n       \"amFrom\": null,\n      \"amTo\": null,\n      \"pmFrom\": null,\n      \"pmTo\": null\n    },\n    \"sunday\": {\n      \"amFrom\": null,\n      \"amTo\": null,\n      \"pmFrom\": null,\n      \"pmTo\": null\n    }\n  },\n  \"mail\": \"info@sushihome.com.ar\",\n  \"scopeImageUrl\": \"https://bit.ly/2CIWHGJ\",\n  \"facebook\": \"https://www.facebook.com/SushiHomeArg\",\n  \"instagram\": \"https://instagram.com/sushihome_arg\",\n  \"twiter\": \"https://twitter.com/sushihomearg\",\n  \"deliveryPrice\": 30,\n  \"addres\": null,\n  \"phone\": \"08004447655\",\n  \"isOpen\": true,\n  \"isVisible\": true,\n  \"isActive\": true\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/branch",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"branch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT BRANCH",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Rosario\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/branch/5c4a0fcefbc2b8de3d5f5f8a",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"branch",
+								"5c4a0fcefbc2b8de3d5f5f8a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE BRANCH",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/branch/5c4a0d671c06f6dd765939e7",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"branch",
+								"5c4a0d671c06f6dd765939e7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEEP DELETE BRANCH",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/branch/delete/5c4a0d671c06f6dd765939e7",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"branch",
+								"delete",
+								"5c4a0d671c06f6dd765939e7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

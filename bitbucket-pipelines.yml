@@ -1,0 +1,35 @@
+image: node:10.2.1
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script: # Modify the commands below to build your repository.
+          - npm install
+          - npm test
+  branches:
+    master:
+      - step:
+          caches:
+          - node
+          deployment: production
+          name: Deploy to Heroku
+          script:
+          - git push -f https://heroku:d34a010a-dd49-455b-9d2c-f8c183d0e4ee@git.heroku.com/simpleq-prod.git HEAD
+    staging:
+      - step:
+          caches:
+          - node
+          deployment: staging
+          name: Deploy to Heroku
+          script:
+          - git push -f https://heroku:d34a010a-dd49-455b-9d2c-f8c183d0e4ee@git.heroku.com/simpleq-staging.git HEAD:master
+    dev:
+      - step:
+          caches:
+          - node
+          deployment: test
+          name: Deploy to Heroku
+          script:
+          - git push -f https://heroku:d34a010a-dd49-455b-9d2c-f8c183d0e4ee@git.heroku.com/simpleq-dev.git HEAD:master
