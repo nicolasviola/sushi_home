@@ -8,7 +8,7 @@ import {
   putUser,
   activeUser,
   deleteUser,
-  deleteUserDeep,
+  // deleteUserDeep,
 } from './controller'
 
 const router = express.Router()
@@ -21,6 +21,6 @@ router.post('/', saveUser)
 router.put('/:id', putUser)
 router.put('/active/:id', activeUser)
 router.delete('/:id', deleteUser)
-router.delete('/delete/:id', deleteUserDeep)
+// router.delete('/delete/:id', deleteUserDeep)
 
 export default router

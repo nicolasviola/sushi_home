@@ -133,7 +133,7 @@ export const deleteUserDeep = (req, res) => {
     (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Product not found')
+      if (!doc) return res.boom.notFound('User not found')
       return res.status(200).send({ message: 'User deep removed!' })
 
     }

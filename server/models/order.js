@@ -11,19 +11,21 @@ const orderSchema = new Schema({
     ref: 'Branch',
     required: true,
   },
-  products: {
-    id: {
-      type: Schema.Types.ObjectId,
-      ref: 'Product',
-      required: true,
+  products: [
+    {
+      id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true,
+      },
+      price: {
+        type: Schema.Types.Number,
+        ref: 'Product',
+        required: true,
+      },
+      ammount: Number,
     },
-    price: {
-      type: Schema.Types.Number,
-      ref: 'Product',
-      required: true,
-    },
-    ammount: Number,
-  },
+  ],
   requestDateTime: String,
   selectedTime: String,
   confirmedTime: String,
@@ -32,7 +34,7 @@ const orderSchema = new Schema({
   deliveryPrice: {
     type: Schema.Types.Number,
     ref: 'Branch',
-    required: true,
+    required: false,
   },
   deliveryAddress: String,
   clientPhoneAdd: {
