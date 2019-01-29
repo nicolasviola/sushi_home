@@ -4,11 +4,11 @@ export const getAllCategories = (req, res) =>
 
   Category.find({ isActive: true }, { isActive: 0 })
 
-    .exec(async (err, data) => {
+    .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!data) return res.boom.notFound('Category not found')
-      return res.status(200).send(data)
+      if (!doc) return res.boom.notFound('Category not found')
+      return res.status(200).send({ doc })
 
     })
 
@@ -16,11 +16,11 @@ export const getAllInactiveCategories = (req, res) =>
 
   Category.find({ isActive: false })
 
-    .exec(async (err, data) => {
+    .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!data) return res.boom.notFound('Category not found')
-      return res.status(200).send(data)
+      if (!doc) return res.boom.notFound('Category not found')
+      return res.status(200).send({ doc })
 
     })
 
@@ -31,7 +31,7 @@ export const getCategoryById = (req, res) =>
 
       if (err) return res.boom.badImplementation('', { error: err })
       if (!category) return res.boom.notFound('Category not found')
-      return res.status(200).send(category)
+      return res.status(200).send({ doc: category })
 
     })
 
@@ -46,7 +46,6 @@ export const saveCategory = (req, res) => {
   return category.save((error, doc) => {
 
     if (error) return res.boom.badImplementation('', { error })
-    // Todo: hide isActive property
     const newCat = {
       _id: doc._id,
       name: doc.name,
@@ -67,9 +66,16 @@ export const updateCategory = (req, res) => {
     { new: true },
     (err, doc) => {
 
+      const refreshCat = {
+        _id: doc._id,
+        name: doc.name,
+        imageUrl: doc.imageUrl,
+        isVisible: doc.isVisible,
+      }
+
       if (err) return res.boom.badImplementation('', { error: err })
       if (!doc) return res.boom.notFound('Category not found')
-      return res.status(200).send({ message: 'Category updated!', doc })
+      return res.status(200).send({ message: 'Category updated!', doc: refreshCat })
 
     }
   )

@@ -4,11 +4,11 @@ export const getAllProducts = (req, res) =>
 
   Product.find({ isActive: true }, { isActive: 0 })
 
-    .exec(async (err, data) => {
+    .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!data) return res.boom.notFound('Product not found')
-      return res.status(200).send(data)
+      if (!doc) return res.boom.notFound('Product not found')
+      return res.status(200).send({ doc })
 
     })
 
@@ -16,11 +16,11 @@ export const getAllInactiveProducts = (req, res) =>
 
   Product.find({ isActive: false })
 
-    .exec(async (err, data) => {
+    .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!data) return res.boom.notFound('Product not found')
-      return res.status(200).send(data)
+      if (!doc) return res.boom.notFound('Product not found')
+      return res.status(200).send({ doc })
 
     })
 
@@ -31,7 +31,7 @@ export const getProductById = (req, res) =>
 
       if (err) return res.boom.badImplementation('', { error: err })
       if (!product) return res.boom.notFound('Product not found')
-      return res.status(200).send(product)
+      return res.status(200).send({ doc: product })
 
     })
 
@@ -45,7 +45,7 @@ export const getProductsByCategoryId = (req, res) =>
 
       if (err) return res.boom.badImplementation('', { error: err })
       if (!product) return res.boom.notFound('Product not found')
-      return res.status(200).send(product)
+      return res.status(200).send({ doc: product })
 
     })
 
@@ -53,7 +53,6 @@ export const saveProduct = (req, res) => {
 
   const product = new Product()
   product.name = req.body.name
-  product.imageUrl = req.body.imageUrl
   product.categoryId = req.body.categoryId
   product.description = req.body.description
   product.units = req.body.units
@@ -64,9 +63,19 @@ export const saveProduct = (req, res) => {
 
   return product.save((error, doc) => {
 
+    const newProduct = {
+      name: doc.name,
+      imageUrl: doc.imageUrl,
+      categoryId: doc.categoryId,
+      description: doc.description,
+      units: doc.units,
+      price: doc.price,
+      isVisible: doc.isVisible,
+      isActive: true,
+    }
+
     if (error) return res.boom.badImplementation('', { error })
-    // Todo: hide isActive property
-    return res.status(200).send({ message: 'Product created', doc })
+    return res.status(200).send({ message: 'Product created', doc: newProduct })
 
   })
 
@@ -81,9 +90,20 @@ export const updateProduct = (req, res) => {
     { new: true },
     (err, doc) => {
 
+      const refreshProduct = {
+        name: doc.name,
+        imageUrl: doc.imageUrl,
+        categoryId: doc.categoryId,
+        description: doc.description,
+        units: doc.units,
+        price: doc.price,
+        isVisible: doc.isVisible,
+        isActive: true,
+      }
+
       if (err) return res.boom.badImplementation('', { error: err })
       if (!doc) return res.boom.notFound('Product not found')
-      return res.status(200).send({ message: 'Product updated!', doc })
+      return res.status(200).send({ message: 'Product updated!', doc: refreshProduct })
 
     }
   )

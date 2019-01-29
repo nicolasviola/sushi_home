@@ -7,7 +7,7 @@ import {
   updateBranch,
   activeBranch,
   deleteBranch,
-  // deleteBranchDeep,
+  deleteBranchDeep,
 } from './controller'
 
 const router = express.Router()
@@ -19,6 +19,6 @@ router.post('/', saveBranch)
 router.put('/:id', updateBranch)
 router.put('/active/:id', activeBranch)
 router.delete('/:id', deleteBranch)
-// router.delete('/delete/:id', deleteBranchDeep)
+router.delete('/delete/:id', deleteBranchDeep)
 
 export default router

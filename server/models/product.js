@@ -6,10 +6,16 @@ const productSchema = new Schema({
     ref: 'Category',
     required: true,
   },
-  name: String,
+  name: {
+    type: String,
+    required: true,
+  },
   description: String,
   units: Number,
-  price: Number,
+  price: {
+    type: String,
+    required: true,
+  },
   imageUrl: String,
   isVisible: Boolean,
   isActive: Boolean,

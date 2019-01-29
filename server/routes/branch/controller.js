@@ -4,11 +4,11 @@ export const getAllBranches = (req, res) =>
 
   Branch.find({ isActive: true }, { isActive: 0 })
 
-    .exec(async (err, data) => {
+    .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!data) return res.boom.notFound('Branch not found')
-      return res.status(200).send(data)
+      if (!doc) return res.boom.notFound('Branch not found')
+      return res.status(200).send({ doc })
 
     })
 
@@ -16,22 +16,22 @@ export const getAllInactiveBranches = (req, res) =>
 
   Branch.find({ isActive: false })
 
-    .exec(async (err, data) => {
+    .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!data) return res.boom.notFound('Branch not found')
-      return res.status(200).send(data)
+      if (!doc) return res.boom.notFound('Branch not found')
+      return res.status(200).send({ doc })
 
     })
 
 export const getBranchesById = (req, res) =>
 
   Branch.findOne({ _id: req.params.id, isActive: true }, { isActive: 0 })
-    .exec(async (err, data) => {
+    .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!data) return res.boom.notFound('Branch not found')
-      return res.status(200).send(data)
+      if (!doc) return res.boom.notFound('Branch not found')
+      return res.status(200).send({ doc })
 
     })
 
@@ -40,12 +40,12 @@ export const saveBranch = (req, res) => {
   const NewBranch = new Branch()
   NewBranch.name = req.body.name
   NewBranch.hours.monday = req.body.hours.monday
-  NewBranch.hours.tuesday = req.body.hours.monday
-  NewBranch.hours.wednesday = req.body.hours.monday
-  NewBranch.hours.thursday = req.body.hours.monday
-  NewBranch.hours.friday = req.body.hours.monday
-  NewBranch.hours.saturday = req.body.hours.monday
-  NewBranch.hours.sunday = req.body.hours.monday
+  NewBranch.hours.tuesday = req.body.hours.tuesday
+  NewBranch.hours.wednesday = req.body.hours.wednesday
+  NewBranch.hours.thursday = req.body.hours.thursday
+  NewBranch.hours.friday = req.body.hours.friday
+  NewBranch.hours.saturday = req.body.hours.saturday
+  NewBranch.hours.sunday = req.body.hours.sunday
   NewBranch.email = req.body.email
   NewBranch.scopeImageUrl = req.body.scopeImageUrl
   NewBranch.facebook = req.body.facebook
@@ -60,9 +60,23 @@ export const saveBranch = (req, res) => {
 
   NewBranch.save((error, doc) => {
 
+    const newBranch = {
+      name: doc.name,
+      hours: doc.hours,
+      email: doc.email,
+      scopeImageUrl: doc.scopeImageUrl,
+      facebook: doc.facebook,
+      instagram: doc.instagram,
+      twiter: doc.twiter,
+      deliveryPrice: doc.deliveryPrice,
+      addres: doc.addres,
+      phone: doc.phone,
+      isOpen: doc.isOpen,
+      isVisible: doc.isVisible,
+    }
+
     if (error) return res.boom.badImplementation('', { error })
-    // Todo: hide isActive property
-    return res.status(200).send({ message: 'Branch created', doc })
+    return res.status(200).send({ message: 'Branch created', doc: newBranch })
 
   })
 
@@ -76,9 +90,24 @@ export const updateBranch = (req, res) => {
     { new: true },
     (err, doc) => {
 
+      const refreshBranch = {
+        name: doc.name,
+        hours: doc.hours,
+        email: doc.email,
+        scopeImageUrl: doc.scopeImageUrl,
+        facebook: doc.facebook,
+        instagram: doc.instagram,
+        twiter: doc.twiter,
+        deliveryPrice: doc.deliveryPrice,
+        addres: doc.addres,
+        phone: doc.phone,
+        isOpen: doc.isOpen,
+        isVisible: doc.isVisible,
+      }
+
       if (err) return res.boom.badImplementation('', { error: err })
       if (!doc) return res.boom.notFound('Branch not found')
-      return res.status(200).send({ message: 'Branch updated!', doc })
+      return res.status(200).send({ message: 'Branch updated!', doc: refreshBranch })
 
     }
   )

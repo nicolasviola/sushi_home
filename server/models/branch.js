@@ -1,7 +1,10 @@
 import mongoose, { Schema } from 'mongoose'
 
 const branchSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true,
+  },
   hours: {
     monday: {
       amFrom: String,
