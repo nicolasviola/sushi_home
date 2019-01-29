@@ -13,16 +13,12 @@ const orderSchema = new Schema({
   },
   products: [
     {
-      id: {
+      productId: {
         type: Schema.Types.ObjectId,
         ref: 'Product',
         required: true,
       },
-      price: {
-        type: Schema.Types.Number,
-        ref: 'Product',
-        required: true,
-      },
+      price: Number,
       ammount: Number,
     },
   ],
@@ -31,22 +27,9 @@ const orderSchema = new Schema({
   confirmedTime: String,
   deliveredTime: String,
   isCanceled: Boolean,
-  deliveryPrice: {
-    type: Schema.Types.Number,
-    ref: 'Branch',
-    required: false,
-  },
+  deliveryPrice: Number,
   deliveryAddress: String,
-  clientPhoneAdd: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  clientPhone: {
-    type: Schema.Types.Number,
-    ref: 'User',
-    required: true,
-  },
+  clientPhone: String,
   clientsComments: String,
   adminComments: String,
   isActive: Boolean,

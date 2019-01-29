@@ -46,7 +46,7 @@ export const saveBranch = (req, res) => {
   NewBranch.hours.friday = req.body.hours.monday
   NewBranch.hours.saturday = req.body.hours.monday
   NewBranch.hours.sunday = req.body.hours.monday
-  NewBranch.mail = req.body.mail
+  NewBranch.email = req.body.email
   NewBranch.scopeImageUrl = req.body.scopeImageUrl
   NewBranch.facebook = req.body.facebook
   NewBranch.instagram = req.body.instagram

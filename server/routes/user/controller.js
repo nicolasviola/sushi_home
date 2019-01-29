@@ -91,21 +91,34 @@ export const activeUser = (req, res) => {
 export const saveUser = (req, res) => {
 
   const user = new User()
-  user.name = req.body.name
-  user.mail = req.body.mail
+  user.firstName = req.body.firstName
+  user.lastName = req.body.lastName
+  user.email = req.body.email
   user.phone = req.body.phone
-  user.pass = req.body.pass
+  user.password = req.body.password
   user.imageUrl = req.body.imageUrl
-  user.addres = req.body.addres
+  user.address = req.body.address
   user.role = req.body.role
-  user.isVisible = req.body.isVisible
+  user.isVisible = true
   user.isActive = true
 
   return user.save((error, data) => {
 
+    const newUser = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      phone: req.body.phone,
+      password: req.body.password,
+      imageUrl: req.body.imageUrl,
+      address: req.body.address,
+      role: req.body.role,
+      isVisible: req.body.isVisible,
+    }
+
     if (error) return res.boom.badImplementation('', { error })
     // Todo: hide isActive property
-    return res.status(200).send({ message: 'User created', doc: data })
+    return res.status(200).send({ message: 'User created', doc: newUser })
 
   })
 

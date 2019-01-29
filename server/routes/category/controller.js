@@ -47,7 +47,13 @@ export const saveCategory = (req, res) => {
 
     if (error) return res.boom.badImplementation('', { error })
     // Todo: hide isActive property
-    return res.status(200).send({ message: 'Category created', doc })
+    const newCat = {
+      _id: doc._id,
+      name: doc.name,
+      imageUrl: doc.imageUrl,
+      isVisible: doc.isVisible,
+    }
+    return res.status(200).send({ message: 'Category created', doc: newCat })
 
   })
 

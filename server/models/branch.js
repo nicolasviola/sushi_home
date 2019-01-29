@@ -46,7 +46,7 @@ const branchSchema = new Schema({
       pmTo: String,
     },
   },
-  mail: String,
+  email: String,
   scopeImageUrl: String,
   facebook: String,
   instagram: String,
