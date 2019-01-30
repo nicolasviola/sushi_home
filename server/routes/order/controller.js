@@ -2,7 +2,10 @@ import Order from '../../models/order'
 
 export const getOrderById = (req, res) => {
 
-  Order.findOne({ _id: req.params.id, isActive: true }, { isActive: 0 })
+  Order.findOne(
+    { _id: req.params.id },
+    { isActive: 0, oldId: 0 }
+  )
     .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
@@ -15,8 +18,8 @@ export const getOrderById = (req, res) => {
 
 export const getAllOrders = (req, res) => {
 
-  Order.find({ isActive: true }, { isActive: 0 })
-    .populate('products.productId', '_id itemId categoryId name description units price imageUrl isVisible')
+  Order.find({}, { isActive: 0, oldId: 0 })
+    .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
     .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
@@ -28,18 +31,18 @@ export const getAllOrders = (req, res) => {
 
 }
 
-export const getAllInactiveOrders = (req, res) => {
+// export const getAllInactiveOrders = (req, res) => {
 
-  Order.find({ isActive: false })
-    .exec(async (err, doc) => {
+//   Order.find({ isActive: false })
+//     .exec(async (err, doc) => {
 
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Orders not found')
-      return res.status(200).send({ doc })
+//       if (err) return res.boom.badImplementation('', { error: err })
+//       if (!doc) return res.boom.notFound('Orders not found')
+//       return res.status(200).send({ doc })
 
-    })
+//     })
 
-}
+// }
 
 export const putOrder = (req, res) => {
 
@@ -59,22 +62,22 @@ export const putOrder = (req, res) => {
 
 }
 
-export const activeOrder = (req, res) => {
+// export const activeOrder = (req, res) => {
 
-  Order.findOneAndUpdate(
-    { isActive: false, _id: req.params.id },
-    { isActive: true },
-    { new: true },
-    (err, doc) => {
+//   Order.findOneAndUpdate(
+//     { isActive: false, _id: req.params.id },
+//     { isActive: true },
+//     { new: true },
+//     (err, doc) => {
 
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Order not found')
-      return res.status(200).send({ message: 'Order active!', doc })
+//       if (err) return res.boom.badImplementation('', { error: err })
+//       if (!doc) return res.boom.notFound('Order not found')
+//       return res.status(200).send({ message: 'Order active!', doc })
 
-    }
-  )
+//     }
+//   )
 
-}
+// }
 
 export const saveOrder = (req, res) => {
 
@@ -122,32 +125,32 @@ export const saveOrder = (req, res) => {
 
 }
 
-export const deleteOrder = (req, res) => {
+// export const deleteOrder = (req, res) => {
 
-  Order.findOneAndUpdate(
-    { isActive: true, _id: req.params.id },
-    { isActive: false },
-    err => {
+//   Order.findOneAndUpdate(
+//     { isActive: true, _id: req.params.id },
+//     { isActive: false },
+//     err => {
 
-      if (err) return res.boom.badImplementation('', { error: err })
-      return res.status(200).send({ message: 'Order removed!' })
+//       if (err) return res.boom.badImplementation('', { error: err })
+//       return res.status(200).send({ message: 'Order removed!' })
 
-    }
-  )
+//     }
+//   )
 
-}
+// }
 
-export const deleteOrderDeep = (req, res) => {
+// export const deleteOrderDeep = (req, res) => {
 
-  Order.findByIdAndRemove(
-    req.params.id,
-    (err, doc) => {
+//   Order.findByIdAndRemove(
+//     req.params.id,
+//     (err, doc) => {
 
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Order not found')
-      return res.status(200).send({ message: 'Order deep removed!' })
+//       if (err) return res.boom.badImplementation('', { error: err })
+//       if (!doc) return res.boom.notFound('Order not found')
+//       return res.status(200).send({ message: 'Order deep removed!' })
 
-    }
-  )
+//     }
+//   )
 
-}
+// }

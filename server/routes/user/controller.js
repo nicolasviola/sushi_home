@@ -3,30 +3,34 @@ import User from '../../models/user'
 export const getUserByToken = (req, res) => {
 
   const token = req.headers.authorization.split(' ')[1]
-  User.findOne({ token }, (err, doc) => {
+  User.findOne({ token }, { isActive: 0, oldId: 0 })
+    .exec(async (err, doc) => {
 
-    const currentUser = {
-      firstName: doc.firstName,
-      lastName: doc.lastName,
-      email: doc.email,
-      phone: doc.phone,
-      imageUrl: doc.imageUrl,
-      address: doc.address,
-      role: doc.role,
-      isVisible: doc.isVisible,
-    }
+      const currentUser = {
+        firstName: doc.firstName,
+        lastName: doc.lastName,
+        email: doc.email,
+        phone: doc.phone,
+        imageUrl: doc.imageUrl,
+        address: doc.address,
+        role: doc.role,
+        isVisible: doc.isVisible,
+      }
 
-    if (err) return res.boom.badImplementation('', { error: err })
-    if (!doc) return res.boom.notFound('user not found')
-    return res.status(200).send({ doc: currentUser })
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc) return res.boom.notFound('user not found')
+      return res.status(200).send({ doc: currentUser })
 
-  })
+    })
 
 }
 
 export const getUserById = (req, res) => {
 
-  User.findOne({ _id: req.params.id, isActive: true }, { isActive: 0 })
+  User.findOne(
+    { _id: req.params.id, isActive: true },
+    { isActive: 0, oldId: 0 }
+  )
     .exec(async (err, doc) => {
 
       const currentUser = {

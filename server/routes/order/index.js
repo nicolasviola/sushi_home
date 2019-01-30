@@ -2,23 +2,23 @@ import express from 'express'
 import {
   getOrderById,
   getAllOrders,
-  getAllInactiveOrders,
+  // getAllInactiveOrders,
   saveOrder,
   putOrder,
-  activeOrder,
-  deleteOrder,
-  deleteOrderDeep,
+  // activeOrder,
+  // deleteOrder,
+  // deleteOrderDeep,
 } from './controller'
 
 const router = express.Router()
 
 router.get('/:id', getOrderById)
 router.get('/', getAllOrders)
-router.get('/inactive/all', getAllInactiveOrders)
+// router.get('/inactive/all', getAllInactiveOrders)
 router.post('/', saveOrder)
 router.put('/:id', putOrder)
-router.put('/active/:id', activeOrder)
-router.delete('/:id', deleteOrder)
-router.delete('/delete/:id', deleteOrderDeep)
+// router.put('/active/:id', activeOrder)
+// router.delete('/:id', deleteOrder)
+// router.delete('/delete/:id', deleteOrderDeep)
 
 export default router

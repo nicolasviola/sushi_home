@@ -2,7 +2,7 @@ import Branch from '../../models/branch'
 
 export const getAllBranches = (req, res) =>
 
-  Branch.find({ isActive: true }, { isActive: 0 })
+  Branch.find({ isActive: true }, { isActive: 0, oldId: 0 })
 
     .exec(async (err, doc) => {
 
@@ -14,7 +14,7 @@ export const getAllBranches = (req, res) =>
 
 export const getAllInactiveBranches = (req, res) =>
 
-  Branch.find({ isActive: false })
+  Branch.find({ isActive: false }, { oldId: 0 })
 
     .exec(async (err, doc) => {
 
@@ -26,7 +26,10 @@ export const getAllInactiveBranches = (req, res) =>
 
 export const getBranchesById = (req, res) =>
 
-  Branch.findOne({ _id: req.params.id, isActive: true }, { isActive: 0 })
+  Branch.findOne(
+    { _id: req.params.id, isActive: true },
+    { isActive: 0, oldId: 0 }
+  )
     .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })

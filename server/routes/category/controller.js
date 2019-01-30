@@ -2,7 +2,7 @@ import Category from '../../models/category'
 
 export const getAllCategories = (req, res) =>
 
-  Category.find({ isActive: true }, { isActive: 0 })
+  Category.find({ isActive: true }, { isActive: 0, oldId: 0 })
 
     .exec(async (err, doc) => {
 
@@ -26,7 +26,10 @@ export const getAllInactiveCategories = (req, res) =>
 
 export const getCategoryById = (req, res) =>
 
-  Category.findOne({ _id: req.params.id, isActive: true }, { isActive: 0 })
+  Category.findOne(
+    { _id: req.params.id, isActive: true },
+    { isActive: 0, oldId: 0 }
+  )
     .exec(async (err, category) => {
 
       if (err) return res.boom.badImplementation('', { error: err })

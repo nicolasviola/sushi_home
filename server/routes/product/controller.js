@@ -2,7 +2,7 @@ import Product from '../../models/product'
 
 export const getAllProducts = (req, res) =>
 
-  Product.find({ isActive: true }, { isActive: 0 })
+  Product.find({ isActive: true }, { isActive: 0, oldId: 0 })
 
     .exec(async (err, doc) => {
 
@@ -26,7 +26,7 @@ export const getAllInactiveProducts = (req, res) =>
 
 export const getProductById = (req, res) =>
 
-  Product.findOne({ _id: req.params.id, isActive: true }, { isActive: 0 })
+  Product.findOne({ _id: req.params.id, isActive: true }, { isActive: 0, oldId: 0 })
     .exec(async (err, product) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
@@ -39,7 +39,7 @@ export const getProductsByCategoryId = (req, res) =>
 
   Product.find(
     { categoryId: req.params.id, isActive: true },
-    { isActive: 0 }
+    { isActive: 0, oldId: 0 }
   )
     .exec(async (err, product) => {
 
