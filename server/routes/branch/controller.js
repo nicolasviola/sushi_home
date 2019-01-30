@@ -52,7 +52,7 @@ export const saveBranch = (req, res) => {
   NewBranch.instagram = req.body.instagram
   NewBranch.twiter = req.body.twiter
   NewBranch.deliveryPrice = req.body.deliveryPrice
-  NewBranch.addres = req.body.addres
+  NewBranch.address = req.body.address
   NewBranch.phone = req.body.phone
   NewBranch.isOpen = req.body.isOpen
   NewBranch.isVisible = req.body.isVisible
@@ -69,7 +69,7 @@ export const saveBranch = (req, res) => {
       instagram: doc.instagram,
       twiter: doc.twiter,
       deliveryPrice: doc.deliveryPrice,
-      addres: doc.addres,
+      address: doc.address,
       phone: doc.phone,
       isOpen: doc.isOpen,
       isVisible: doc.isVisible,
@@ -99,7 +99,7 @@ export const updateBranch = (req, res) => {
         instagram: doc.instagram,
         twiter: doc.twiter,
         deliveryPrice: doc.deliveryPrice,
-        addres: doc.addres,
+        address: doc.address,
         phone: doc.phone,
         isOpen: doc.isOpen,
         isVisible: doc.isVisible,

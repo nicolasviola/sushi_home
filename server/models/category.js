@@ -1,11 +1,11 @@
 import mongoose, { Schema } from 'mongoose'
 
 const categorySchema = new Schema({
+  oldId: Number,
   name: {
     type: String,
     required: true,
   },
-  itemId: Number,
   imageUrl: String,
   order: Number,
   isVisible: Boolean,

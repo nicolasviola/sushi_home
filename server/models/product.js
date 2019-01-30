@@ -1,7 +1,8 @@
 import mongoose, { Schema } from 'mongoose'
 
 const productSchema = new Schema({
-  categoryId: {
+  oldId: Number,
+  category: {
     type: Schema.Types.ObjectId,
     ref: 'Category',
     required: true,

@@ -1,19 +1,20 @@
 import mongoose, { Schema } from 'mongoose'
 
 const orderSchema = new Schema({
-  userId: {
+  oldId: Number,
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  branchId: {
+  branch: {
     type: Schema.Types.ObjectId,
     ref: 'Branch',
     required: true,
   },
   products: [
     {
-      productId: {
+      product: {
         type: Schema.Types.ObjectId,
         ref: 'Product',
         required: true,
@@ -27,12 +28,12 @@ const orderSchema = new Schema({
   confirmedTime: String,
   deliveredTime: String,
   isCanceled: Boolean,
+  isDelivery: Boolean,
   deliveryPrice: Number,
   deliveryAddress: String,
   clientPhone: String,
-  clientsComments: String,
-  adminComments: String,
-  isActive: Boolean,
+  clientComments: String,
+  adminComments: String
 })
 
 export default mongoose.model('Order', orderSchema)

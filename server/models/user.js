@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
 
 const userSchema = new Schema({
+  oldId: Number,
   firstName: {
     type: String,
     required: true,
@@ -25,6 +26,7 @@ const userSchema = new Schema({
     enum: ['admin', 'client'],
     required: true,
   },
+  dateAdded: String,
   isVisible: Boolean,
   isActive: Boolean,
 })

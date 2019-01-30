@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
 
 const branchSchema = new Schema({
+  oldId: Number,
   name: {
     type: String,
     required: true,
@@ -55,7 +56,7 @@ const branchSchema = new Schema({
   instagram: String,
   twiter: String,
   deliveryPrice: Number,
-  addres: String,
+  address: String,
   phone: String,
   isOpen: Boolean,
   isVisible: Boolean,
