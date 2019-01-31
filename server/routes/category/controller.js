@@ -44,6 +44,7 @@ export const saveCategory = (req, res) => {
   category.name = req.body.name
   category.imageUrl = req.body.imageUrl
   category.isVisible = req.body.isVisible
+  category.order = req.body.order || 0
   category.isActive = true
 
   return category.save((error, doc) => {
@@ -52,6 +53,7 @@ export const saveCategory = (req, res) => {
     const newCat = {
       _id: doc._id,
       name: doc.name,
+      order: doc.order || 0,
       imageUrl: doc.imageUrl,
       isVisible: doc.isVisible,
     }
@@ -65,13 +67,17 @@ export const updateCategory = (req, res) => {
 
   Category.findOneAndUpdate(
     { isActive: true, _id: req.params.id },
-    req.body,
+    {
+      ...req.body,
+      order: req.body.order || 0,
+    },
     { new: true },
     (err, doc) => {
 
       const refreshCat = {
         _id: doc._id,
         name: doc.name,
+        order: doc.order || 0,
         imageUrl: doc.imageUrl,
         isVisible: doc.isVisible,
       }

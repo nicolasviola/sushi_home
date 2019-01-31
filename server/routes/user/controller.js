@@ -7,6 +7,7 @@ export const getUserByToken = (req, res) => {
     .exec(async (err, doc) => {
 
       const currentUser = {
+        _id: doc._id,
         firstName: doc.firstName,
         lastName: doc.lastName,
         email: doc.email,
@@ -14,6 +15,7 @@ export const getUserByToken = (req, res) => {
         imageUrl: doc.imageUrl,
         address: doc.address,
         role: doc.role,
+        token: doc.token,
         isVisible: doc.isVisible,
       }
 
@@ -34,8 +36,10 @@ export const getUserById = (req, res) => {
     .exec(async (err, doc) => {
 
       const currentUser = {
+        _id: doc._id,
         firstName: doc.firstName,
         lastName: doc.lastName,
+        token: doc.token,
         email: doc.email,
         phone: doc.phone,
         imageUrl: doc.imageUrl,
@@ -64,6 +68,7 @@ export const getAllUsers = (req, res) => {
     imageUrl: 1,
     role: 1,
     isVisible: 1,
+    token: 1,
   })
     .exec(async (err, doc) => {
 
@@ -100,40 +105,6 @@ export const getAllInactiveUsers = (req, res) => {
 
 }
 
-export const saveUser = (req, res) => {
-
-  const user = new User()
-  user.firstName = req.body.firstName
-  user.lastName = req.body.lastName
-  user.email = req.body.email
-  user.phone = req.body.phone
-  user.password = req.body.password
-  user.imageUrl = req.body.imageUrl
-  user.address = req.body.address
-  user.role = req.body.role
-  user.isVisible = true
-  user.isActive = true
-
-  return user.save((error, data) => {
-
-    const newUser = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      phone: req.body.phone,
-      imageUrl: req.body.imageUrl,
-      address: req.body.address,
-      role: req.body.role,
-      isVisible: req.body.isVisible,
-    }
-
-    if (error) return res.boom.badImplementation('', { error })
-    return res.status(200).send({ message: 'User created', doc: newUser })
-
-  })
-
-}
-
 export const putUser = (req, res) => {
 
   User.findOneAndUpdate(
@@ -143,6 +114,7 @@ export const putUser = (req, res) => {
     (err, doc) => {
 
       const refreshUser = {
+        _id: doc._id,
         firstName: doc.firstName,
         lastName: doc.lastName,
         email: doc.email,
@@ -171,6 +143,7 @@ export const activeUser = (req, res) => {
     (err, doc) => {
 
       const refreshUser = {
+        _id: doc._id,
         firstName: doc.firstName,
         lastName: doc.lastName,
         email: doc.email,

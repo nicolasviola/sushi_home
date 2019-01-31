@@ -26,7 +26,10 @@ export const getAllInactiveProducts = (req, res) =>
 
 export const getProductById = (req, res) =>
 
-  Product.findOne({ _id: req.params.id, isActive: true }, { isActive: 0, oldId: 0 })
+  Product.findOne(
+    { _id: req.params.id, isActive: true },
+    { isActive: 0, oldId: 0 }
+  )
     .exec(async (err, product) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
@@ -64,6 +67,7 @@ export const saveProduct = (req, res) => {
   return product.save((error, doc) => {
 
     const newProduct = {
+      _id: doc._id,
       name: doc.name,
       imageUrl: doc.imageUrl,
       categoryId: doc.categoryId,
@@ -91,6 +95,7 @@ export const updateProduct = (req, res) => {
     (err, doc) => {
 
       const refreshProduct = {
+        _id: doc._id,
         name: doc.name,
         imageUrl: doc.imageUrl,
         categoryId: doc.categoryId,

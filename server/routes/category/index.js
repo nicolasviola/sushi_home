@@ -7,7 +7,7 @@ import {
   updateCategory,
   activeCategory,
   deleteCategory,
-  // deleteCategoryDeep,
+  deleteCategoryDeep,
 } from './controller'
 
 const router = express.Router()
@@ -19,6 +19,6 @@ router.post('/', saveCategory)
 router.put('/:id', updateCategory)
 router.put('/active/:id', activeCategory)
 router.delete('/:id', deleteCategory)
-// router.delete('/delete/:id', deleteCategoryDeep)
+router.delete('/delete/:id', deleteCategoryDeep)
 
 export default router

@@ -1,0 +1,20 @@
+import express from 'express'
+import {
+  signUp,
+  signIn,
+  // forgotPassword,
+  // resetPassword,
+  // logout,
+  // serverStatus,
+} from './controller'
+
+const router = express.Router()
+
+router.post('/signUp', signUp)
+router.post('/signIn', signIn)
+// router.post('/forgotPassword', forgotPassword)
+// router.put('/resetPassword', resetPassword)
+// router.delete('/logout', logout)
+// router.post('/serverStatus', serverStatus)
+
+export default router

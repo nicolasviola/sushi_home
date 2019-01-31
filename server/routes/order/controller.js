@@ -101,6 +101,7 @@ export const saveOrder = (req, res) => {
   return order.save((error, data) => {
 
     const refreshOrder = {
+      _id: data._id,
       userId: data.userId,
       branchId: data.branchId,
       products: data.products,

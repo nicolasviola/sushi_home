@@ -4,7 +4,6 @@ import {
   getUserById,
   getAllUsers,
   getAllInactiveUsers,
-  saveUser,
   putUser,
   activeUser,
   deleteUser,
@@ -17,7 +16,6 @@ const router = express.Router()
 router.get('/:id', getUserById)
 router.get('/', getAllUsers)
 router.get('/inactive/all', getAllInactiveUsers)
-router.post('/', saveUser)
 router.put('/:id', putUser)
 router.put('/active/:id', activeUser)
 router.delete('/:id', deleteUser)

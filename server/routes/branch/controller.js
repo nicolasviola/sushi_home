@@ -64,6 +64,7 @@ export const saveBranch = (req, res) => {
   NewBranch.save((error, doc) => {
 
     const newBranch = {
+      _id: doc._id,
       name: doc.name,
       hours: doc.hours,
       email: doc.email,
@@ -94,6 +95,7 @@ export const updateBranch = (req, res) => {
     (err, doc) => {
 
       const refreshBranch = {
+        _id: doc._id,
         name: doc.name,
         hours: doc.hours,
         email: doc.email,
