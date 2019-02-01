@@ -43,6 +43,7 @@
     "node-cron": "^2.0.3",
     "npm": "^6.3.0",
     "request": "^2.87.0",
+    "sha256": "^0.2.0",
     "twilio": "^3.17.1",
     "ua-parser-js": "^0.7.19",
     "webpack-node-externals": "^1.7.2",

@@ -91,7 +91,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Roldan\",\n  \"hours\": {\n    \"monday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"tuesday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"wednesday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"thursday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"friday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"saturday\": {\n       \"amFrom\": null,\n      \"amTo\": null,\n      \"pmFrom\": null,\n      \"pmTo\": null\n    },\n    \"sunday\": {\n      \"amFrom\": null,\n      \"amTo\": null,\n      \"pmFrom\": null,\n      \"pmTo\": null\n    }\n  },\n  \"mail\": \"info@sushihome.com.ar\",\n  \"scopeImageUrl\": \"https://bit.ly/2CIWHGJ\",\n  \"facebook\": \"https://www.facebook.com/SushiHomeArg\",\n  \"instagram\": \"https://instagram.com/sushihome_arg\",\n  \"twiter\": \"https://twitter.com/sushihomearg\",\n  \"deliveryPrice\": 30,\n  \"address\": null,\n  \"phone\": \"08004447677\",\n  \"isOpen\": true,\n  \"isVisible\": true,\n  \"isActive\": true\n}"
+							"raw": "{\n  \"name\": \"Roldan\",\n  \"hours\": {\n    \"monday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"tuesday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"wednesday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"thursday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"friday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"saturday\": {\n       \"amFrom\": null,\n      \"amTo\": null,\n      \"pmFrom\": null,\n      \"pmTo\": null\n    },\n    \"sunday\": {\n      \"amFrom\": null,\n      \"amTo\": null,\n      \"pmFrom\": null,\n      \"pmTo\": null\n    }\n  },\n  \"mail\": \"info@sushihome.com.ar\",\n  \"scopeImageUrl\": \"https://bit.ly/2CIWHGJ\",\n  \"facebook\": \"https://www.facebook.com/SushiHomeArg\",\n  \"instagram\": \"https://instagram.com/sushihome_arg\",\n  \"twiter\": \"https://twitter.com/sushihomearg\",\n  \"deliveryPrice\": 30,\n  \"addres\": null,\n  \"phone\": \"08004447677\",\n  \"isOpen\": true,\n  \"isVisible\": true,\n  \"isActive\": true\n}"
 						},
 						"url": {
 							"raw": "{{host}}/api/branch",
@@ -217,241 +217,6 @@
 			]
 		},
 		{
-			"name": "User",
-			"item": [
-				{
-					"name": "GET USER BY TOKEN",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/user/token",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"token"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET ALL USERS",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/user/",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"user",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET USER BY ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/user/5c4b480c1ec77cf1c9ea6253",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"5c4b480c1ec77cf1c9ea6253"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET ALL INACTIVE USERS",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/user/inactive/all",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"inactive",
-								"all"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "POST USER",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"firstName\": \"Nicolas\",\n  \"lastName\": \"Cage\",\n  \"email\": \"nicolas.cage@gmail.com\",\n  \"password\": \"miContraseña2\",\n  \"phone\": \"0303456710\",\n  \"address\": \"Santa Fe 1240\",\n  \"imageUrl\": \"https://bit.ly/2DFA4F8\",\n  \"role\": \"client\"\n}"
-						},
-						"url": {
-							"raw": "{{host}}/api/user",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"user"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PUT USER",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Nicolás Viola\"\n}"
-						},
-						"url": {
-							"raw": "{{host}}/api/user/5c4b480c1ec77cf1c9ea6253",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"5c4b480c1ec77cf1c9ea6253"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PUT ACTIVE USER",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/user/active/5c4b5336f93e92f2905e38e0",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"active",
-								"5c4b5336f93e92f2905e38e0"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE USER",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/user/5c4b5336f93e92f2905e38e0",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"5c4b5336f93e92f2905e38e0"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DEEP DELETE USER",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/user/delete/5c4b56912515fff37cc17900",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"delete",
-								"5c4b56912515fff37cc17900"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Category",
 			"item": [
 				{
@@ -537,7 +302,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Entradas\",\n  \"imageUrl\": \"https://bit.ly/2Tcz9kz\",\n  \"isVisible\": true,\n  \"isActive\": true\n}"
+							"raw": "{\n  \"name\": \"Platos nuevos\",\n  \"imageUrl\": \"https://bit.ly/2Tcz9kz\",\n  \"order\": 11,\n  \"isVisible\": true,\n  \"isActive\": true\n}"
 						},
 						"url": {
 							"raw": "{{host}}/api/category",
@@ -655,6 +420,115 @@
 								"category",
 								"delete",
 								"5c49e8777f5502d292ba9913"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "GET ALL ORDERS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/order",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ORDER BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/order/5c4f4adc18a79d1853a83d2d",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"5c4f4adc18a79d1853a83d2d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST ORDER",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"5c5074abb914c058595a8961\",\n  \"branchId\": \"5c5074abb914c058595a895f\",\n  \"products\": [\n    {\n      \"product\": \"5c5074ccb914c058595abdca\",\n      \"price\": 130,\n      \"ammount\": 2\n    },\n    {\n      \"product\": \"5c5074ccb914c058595abdc9\",\n      \"price\": 130,\n      \"ammount\": 4\n    },\n    {\n      \"product\": \"5c5074ccb914c058595abdcc\",\n      \"price\": 130,\n      \"ammount\": 1\n    }\n  ],\n  \"requestDateTime\": \"28/01/2019 - 11:30\",\n  \"selectedTime\": \"28/01/2019 - 22:30\",\n  \"confirmedTime\": \"28/01/2019 - 22:30\",\n  \"deliveredTime\": \"28/01/2019 - 22:30\",\n  \"deliveryPrice\": 30,\n  \"deliveryAddress\": \"Santa Fe 1240\",\n  \"clientPhoneAdd\": \"0303456792\",\n  \"clientPhone\": \"0303456790\",\n  \"clientsComments\": \"Por favor traer servilletas\",\n  \"adminComments\": null\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/order",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT ORDER",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"products\": [\n\t  \t{\n\t      \"productId\": \"5c5074ccb914c058595abdca\",\n\t      \"price\": 180,\n\t      \"ammount\": 5\n\t    }\n\t]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/order/5c508b27856c4d50c16d75a6",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"5c508b27856c4d50c16d75a6"
 							]
 						}
 					},
@@ -899,10 +773,10 @@
 			]
 		},
 		{
-			"name": "Order",
+			"name": "User",
 			"item": [
 				{
-					"name": "GET ALL ORDERS",
+					"name": "GET USER BY TOKEN",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -911,20 +785,21 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/order",
+							"raw": "{{host}}/api/user/token",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"order"
+								"user",
+								"token"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GET ORDER BY ID",
+					"name": "GET ALL USERS",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -933,21 +808,21 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/order/5c4f4adc18a79d1853a83d2d",
+							"raw": "{{host}}/api/user/",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"order",
-								"5c4f4adc18a79d1853a83d2d"
+								"user",
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GET ALL INACTIVE ORDERS",
+					"name": "GET USER BY ID",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -956,13 +831,36 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/order/inactive/all",
+							"raw": "{{host}}/api/user/5c535d46f6ec6c12b647e4f6",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"order",
+								"user",
+								"5c535d46f6ec6c12b647e4f6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL INACTIVE USERS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/user/inactive/all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"user",
 								"inactive",
 								"all"
 							]
@@ -971,7 +869,120 @@
 					"response": []
 				},
 				{
-					"name": "POST ORDER",
+					"name": "PUT USER",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Nicolás Viola\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/user/5c4b480c1ec77cf1c9ea6253",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"5c4b480c1ec77cf1c9ea6253"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT ACTIVE USER",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/user/active/5c4b5336f93e92f2905e38e0",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"active",
+								"5c4b5336f93e92f2905e38e0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE USER",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/user/5c4b5336f93e92f2905e38e0",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"5c4b5336f93e92f2905e38e0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEEP DELETE USER",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/user/delete/5c4b56912515fff37cc17900",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"delete",
+								"5c4b56912515fff37cc17900"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "SIGN UP",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -984,25 +995,26 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"userId\": \"5c5074abb914c058595a8961\",\n  \"branchId\": \"5c5074abb914c058595a895f\",\n  \"products\": [\n    {\n      \"productId\": \"5c5074ccb914c058595abdca\",\n      \"price\": 130,\n      \"ammount\": 2\n    },\n    {\n      \"productId\": \"5c5074ccb914c058595abdc9\",\n      \"price\": 130,\n      \"ammount\": 4\n    },\n    {\n      \"productId\": \"5c5074ccb914c058595abdcc\",\n      \"price\": 130,\n      \"ammount\": 1\n    }\n  ],\n  \"requestDateTime\": \"28/01/2019 - 11:30\",\n  \"selectedTime\": \"28/01/2019 - 22:30\",\n  \"confirmedTime\": \"28/01/2019 - 22:30\",\n  \"deliveredTime\": \"28/01/2019 - 22:30\",\n  \"deliveryPrice\": 30,\n  \"deliveryAddress\": \"Santa Fe 1240\",\n  \"clientPhoneAdd\": \"0303456792\",\n  \"clientPhone\": \"0303456790\",\n  \"clientsComments\": \"Por favor traer servilletas\",\n  \"adminComments\": null\n}"
+							"raw": "{\n  \"firstName\": \"Rosana\",\n  \"lastName\": \"Buzzone\",\n  \"email\": \"rosana.buzzone@radiumrocket.com\",\n  \"password\": \"miContraseña10\",\n  \"phone\": \"0303456710\",\n  \"addres\": \"Santa Fe 180\",\n  \"imageUrl\": \"https://bit.ly/2DFA4F8\",\n  \"role\": \"client\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/order",
+							"raw": "{{host}}/api/auth/signUp",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"order"
+								"auth",
+								"signUp"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "PUT ORDER",
+					"name": "SIGN IN",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -1013,95 +1025,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"products\": [\n\t  \t{\n\t      \"productId\": \"5c5074ccb914c058595abdca\",\n\t      \"price\": 180,\n\t      \"ammount\": 5\n\t    }\n\t]\n}"
+							"raw": "{\n  \"email\": \"esteban.frare@radiumrocket.com\",\n  \"password\": \"miContraseña8\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/order/5c508b27856c4d50c16d75a6",
+							"raw": "{{host}}/api/auth/signIn",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"order",
-								"5c508b27856c4d50c16d75a6"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PUT ACTIVE ORDER",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/order/active/5c4f4adc18a79d1853a83d2d",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"order",
-								"active",
-								"5c4f4adc18a79d1853a83d2d"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE ORDER",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/order/5c4f4adc18a79d1853a83d2d",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"order",
-								"5c4f4adc18a79d1853a83d2d"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DEEP DELETE ORDER",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/order/delete/5c49e80c6baba5d1dfc7a3ba",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"order",
-								"delete",
-								"5c49e80c6baba5d1dfc7a3ba"
+								"auth",
+								"signIn"
 							]
 						}
 					},

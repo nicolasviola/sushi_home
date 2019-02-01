@@ -1,3 +1,4 @@
+import sha256 from 'sha256'
 import moment from 'moment'
 import User from '../../models/user'
 import createToken from '../../helpers/services'
@@ -16,7 +17,7 @@ export const signUp = (req, res) => {
 
         const user = new User()
         user.email = req.body.email
-        user.password = req.body.password
+        user.password = sha256(req.body.password)
         user.token = token
         user.firstName = req.body.firstName
         user.lastName = req.body.lastName
@@ -31,6 +32,7 @@ export const signUp = (req, res) => {
         return user.save((error, data) => {
 
           const newUser = {
+            _id: data._id,
             email: data.email,
             token: data.token,
             firstName: data.firstName,
@@ -60,7 +62,7 @@ export const signIn = (req, res) => {
   const token = createToken(req.body.email)
 
   User.findOneAndUpdate(
-    { email: req.body.email, password: req.body.password },
+    { email: req.body.email, password: sha256(req.body.password) },
     { token },
     (err, doc) => {
 
