@@ -95,19 +95,68 @@ export const signIn = (req, res) => {
 
 export const forgotPassword = (req, res) => {
 
-  // obtener los datos del body de la req (email)
-  // buscar en la base de datos el mismo email
-  //   *  si no existe no hacer nada
-  //   *  si existe generar una nueva password, pisarla en base de datos
+  const newPassword = sha256(Date.now().toString()).substr(1, 15)
+
+  User.findOneAndUpdate(
+    { email: req.body.email },
+    { password: sha256(newPassword) },
+    (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (doc) {
+
+        return res.status(200).send({ status: 'OK' })
+
+      }
+
+      return res.boom.unauthorized('Username doesn`t exist')
+
+    }
+  )
   // enviar la nueva contraseña por mail
   // sengrid para emails
 
 }
 
+export const resetPassword = (req, res) => {
+
+  User.findOneAndUpdate(
+    { email: req.body.email, password: sha256(req.body.currentPassword) },
+    { password: sha256(req.body.newPassword) },
+    (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (doc) {
+
+        return res.status(200).send({ status: 'OK' })
+
+      }
+
+      return res.boom.unauthorized('Username doesn`t exist')
+
+    }
+  )
+
+}
+
 export const logout = (req, res) => {
 
-  // remove token from db
-  res.status(200).send({ message: 'logout' })
+  User.findOneAndUpdate(
+    { email: req.body.email },
+    { token: null },
+    (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (doc) {
+
+        return res.status(200).send({ message: 'logout' })
+
+      }
+
+      return res.boom.unauthorized('Username doesn`t exist')
+
+    }
+  )
 
 }
 
