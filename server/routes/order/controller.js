@@ -6,6 +6,12 @@ export const getOrderById = (req, res) => {
     { _id: req.params.id },
     { isActive: 0, oldId: 0 }
   )
+    .populate('user', '_id firstName lastName email phone address imageUrl role dateAdded isVisible')
+    .populate(
+      'branch',
+      '_id hours name email scopeImageUrl facebook instagram twiter deliveryPrice address phone isOpen isVisible'
+    )
+    .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
     .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
@@ -19,6 +25,11 @@ export const getOrderById = (req, res) => {
 export const getAllOrders = (req, res) => {
 
   Order.find({}, { isActive: 0, oldId: 0 })
+    .populate('user', '_id firstName lastName email phone address imageUrl role dateAdded isVisible')
+    .populate(
+      'branch',
+      '_id hours name email scopeImageUrl facebook instagram twiter deliveryPrice address phone isOpen isVisible'
+    )
     .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
     .exec(async (err, doc) => {
 
@@ -31,59 +42,11 @@ export const getAllOrders = (req, res) => {
 
 }
 
-// export const getAllInactiveOrders = (req, res) => {
-
-//   Order.find({ isActive: false })
-//     .exec(async (err, doc) => {
-
-//       if (err) return res.boom.badImplementation('', { error: err })
-//       if (!doc) return res.boom.notFound('Orders not found')
-//       return res.status(200).send({ doc })
-
-//     })
-
-// }
-
-export const putOrder = (req, res) => {
-
-  Order.findOneAndUpdate(
-    { isActive: true, _id: req.params.id },
-    req.body,
-    { new: true },
-  )
-    .populate('products.productId', '_id itemId categoryId name description units price imageUrl isVisible')
-    .exec((err, doc) => {
-
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Order not found')
-      return res.status(200).send({ message: 'Order updated!', doc })
-
-    })
-
-}
-
-// export const activeOrder = (req, res) => {
-
-//   Order.findOneAndUpdate(
-//     { isActive: false, _id: req.params.id },
-//     { isActive: true },
-//     { new: true },
-//     (err, doc) => {
-
-//       if (err) return res.boom.badImplementation('', { error: err })
-//       if (!doc) return res.boom.notFound('Order not found')
-//       return res.status(200).send({ message: 'Order active!', doc })
-
-//     }
-//   )
-
-// }
-
 export const saveOrder = (req, res) => {
 
   const order = new Order()
-  order.userId = req.body.userId
-  order.branchId = req.body.branchId
+  order.user = req.body.user
+  order.branch = req.body.branch
   order.products = req.body.products
   order.requestDateTime = req.body.requestDateTime
   order.selectedTime = req.body.selectedTime
@@ -98,48 +61,71 @@ export const saveOrder = (req, res) => {
   order.adminComments = req.body.adminComments
   order.isActive = true
 
-  return order.save((error, data) => {
-
-    const refreshOrder = {
-      _id: data._id,
-      userId: data.userId,
-      branchId: data.branchId,
-      products: data.products,
-      requestDateTime: data.requestDateTime,
-      selectedTime: data.selectedTime,
-      confirmedTime: data.confirmedTime,
-      deliveredTime: data.deliveredTime,
-      isCanceled: data.isCanceled,
-      deliveryPrice: data.deliveryPrice,
-      deliveryAddress: data.deliveryAddress,
-      clientPhoneAdd: data.clientPhoneAdd,
-      clientPhone: data.clientPhone,
-      clientsComments: data.clientsComments,
-      adminComments: data.adminComments,
-      isActive: true,
-    }
+  return Order.create(order, async (error, doc) => {
 
     if (error) return res.boom.badImplementation('', { error })
-    return res.status(200).send({ message: 'Order created', doc: refreshOrder })
+    return Order.findOne(
+      { _id: doc.id },
+      { isActive: 0, oldId: 0 }
+    )
+      .populate('user', '_id firstName lastName email phone address imageUrl role dateAdded isVisible')
+      .populate(
+        'branch',
+        '_id hours name email scopeImageUrl facebook instagram twiter deliveryPrice address phone isOpen isVisible'
+      )
+      .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
+      .exec(async (err, docu) => {
+
+        const newOrder = {
+          _id: docu._id,
+          user: docu.user,
+          branch: docu.branch,
+          products: docu.products,
+          requestDateTime: docu.requestDateTime,
+          selectedTime: docu.selectedTime,
+          confirmedTime: docu.confirmedTime,
+          deliveredTime: docu.deliveredTime,
+          isCanceled: docu.isCanceled,
+          deliveryPrice: docu.deliveryPrice,
+          deliveryAddress: docu.deliveryAddress,
+          clientPhoneAdd: docu.clientPhoneAdd,
+          clientPhone: docu.clientPhone,
+          clientsComments: docu.clientsComments,
+          adminComments: docu.adminComments,
+        }
+
+        if (err) return res.boom.badImplementation('', { err })
+        if (!docu) return res.boom.badImplementation('', { error })
+        return res.status(200).send({ message: 'Order created', doc: newOrder })
+
+      })
 
   })
 
 }
 
-// export const deleteOrder = (req, res) => {
+export const refreshOrder = (req, res) => {
 
-//   Order.findOneAndUpdate(
-//     { isActive: true, _id: req.params.id },
-//     { isActive: false },
-//     err => {
+  Order.findOneAndUpdate(
+    { isActive: true, _id: req.params.id },
+    req.body,
+    { new: true },
+  )
+    .populate('user', '_id firstName lastName email phone address imageUrl role dateAdded isVisible')
+    .populate(
+      'branch',
+      '_id hours name email scopeImageUrl facebook instagram twiter deliveryPrice address phone isOpen isVisible'
+    )
+    .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
+    .exec((err, doc) => {
 
-//       if (err) return res.boom.badImplementation('', { error: err })
-//       return res.status(200).send({ message: 'Order removed!' })
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc) return res.boom.notFound('Order not found')
+      return res.status(200).send({ message: 'Order updated!', doc })
 
-//     }
-//   )
+    })
 
-// }
+}
 
 // export const deleteOrderDeep = (req, res) => {
 

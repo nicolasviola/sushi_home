@@ -33,7 +33,7 @@ const orderSchema = new Schema({
   deliveryAddress: String,
   clientPhone: String,
   clientComments: String,
-  adminComments: String
+  adminComments: String,
 })
 
 export default mongoose.model('Order', orderSchema)
