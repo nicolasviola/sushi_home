@@ -42,13 +42,35 @@ export const getAllOrders = (req, res) => {
 
 }
 
+export const getRecentOrders = (req, res) => {
+
+  Order.find({}, { isActive: 0, oldId: 0 })
+    .sort({'requestDateTime': -1})
+    .limit(100)
+    .populate('user', '_id firstName lastName email phone address imageUrl role dateAdded isVisible')
+    .populate(
+      'branch',
+      '_id hours name email scopeImageUrl facebook instagram twiter deliveryPrice address phone isOpen isVisible'
+    )
+    .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
+    .exec(async (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc) return res.boom.notFound('Orders not found')
+
+      return res.status(200).send({ doc })
+
+    })
+
+}
+
 export const saveOrder = (req, res) => {
 
   const order = new Order()
   order.user = req.body.user
   order.branch = req.body.branch
   order.products = req.body.products
-  order.requestDateTime = req.body.requestDateTime
+  order.requestDateTime = Date.now()
   order.selectedTime = req.body.selectedTime
   order.confirmedTime = req.body.confirmedTime
   order.deliveredTime = req.body.deliveredTime

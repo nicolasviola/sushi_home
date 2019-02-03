@@ -1,4 +1,5 @@
 import User from '../../models/user'
+import Order from '../../models/order'
 
 export const getUserByToken = (req, res) => {
 
@@ -100,6 +101,24 @@ export const getAllInactiveUsers = (req, res) => {
       if (!doc) return res.boom.notFound('Users not found')
       return res.status(200).send({ doc })
 
+
+    })
+
+}
+
+export const getRecentUsers = (req, res) => {
+
+  Order.find({}, { isActive: 0, oldId: 0 })
+    .sort({'requestDateTime': -1})
+    .limit(200)
+    .populate('user', '_id itemId firstName lastName email phone address imageUrl role isVisible isActive')
+    .exec(async (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc) return res.boom.notFound('Orders not found')
+      const users = doc.map(item => item.user).slice(0,100)
+
+      return res.status(200).send({ doc: users })
 
     })
 
