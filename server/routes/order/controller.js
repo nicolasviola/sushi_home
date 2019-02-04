@@ -1,29 +1,5 @@
-import { isValidOId } from '../../helpers/types'
+import isValidOId from '../../helpers/types'
 import Order from '../../models/order'
-
-export const getOrderById = (req, res) => {
-
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
-
-  Order.findOne(
-    { _id: req.params.id },
-    { isActive: 0, oldId: 0 }
-  )
-    .populate('user', '_id firstName lastName email phone address imageUrl role dateAdded isVisible')
-    .populate(
-      'branch',
-      '_id hours name email scopeImageUrl facebook instagram twiter deliveryPrice address phone isOpen isVisible'
-    )
-    .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
-    .exec(async (err, doc) => {
-
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc || !doc._id) return res.boom.notFound('Order not found')
-      return res.status(200).send({ doc })
-
-    })
-
-}
 
 export const getAllOrders = (req, res) => {
 
@@ -54,7 +30,7 @@ export const getRecentOrders = (req, res) => {
       '_id hours name email scopeImageUrl facebook instagram twiter deliveryPrice address phone isOpen isVisible'
     )
     .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
-    .sort({'requestDateTime': -1})
+    .sort({ requestDateTime: -1 })
     .limit(100)
     .exec(async (err, doc) => {
 
@@ -62,6 +38,30 @@ export const getRecentOrders = (req, res) => {
       if (!doc) return res.boom.notFound('Orders not found')
 
       return res.status(200).send({ doc: doc.filter(item => item.user) })
+
+    })
+
+}
+
+export const getOrderById = (req, res) => {
+
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
+  Order.findOne(
+    { _id: req.params.id },
+    { isActive: 0, oldId: 0 }
+  )
+    .populate('user', '_id firstName lastName email phone address imageUrl role dateAdded isVisible')
+    .populate(
+      'branch',
+      '_id hours name email scopeImageUrl facebook instagram twiter deliveryPrice address phone isOpen isVisible'
+    )
+    .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
+    .exec(async (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc || !doc._id) return res.boom.notFound('Order not found')
+      return res.status(200).send({ doc })
 
     })
 
@@ -131,7 +131,7 @@ export const saveOrder = (req, res) => {
 
 export const refreshOrder = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Order.findOneAndUpdate(
     { isActive: true, _id: req.params.id },

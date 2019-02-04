@@ -1,4 +1,4 @@
-import { isValidOId } from '../../helpers/types'
+import isValidOId from '../../helpers/types'
 import Branch from '../../models/branch'
 
 export const getAllBranches = (req, res) =>
@@ -27,7 +27,7 @@ export const getAllInactiveBranches = (req, res) =>
 
 export const getBranchesById = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Branch.findOne(
     { _id: req.params.id, isActive: true },
@@ -40,6 +40,7 @@ export const getBranchesById = (req, res) => {
       return res.status(200).send({ doc })
 
     })
+
 }
 
 export const saveBranch = (req, res) => {
@@ -92,7 +93,7 @@ export const saveBranch = (req, res) => {
 
 export const updateBranch = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Branch.findOneAndUpdate(
     { isActive: true, _id: req.params.id },
@@ -127,7 +128,7 @@ export const updateBranch = (req, res) => {
 
 export const activeBranch = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Branch.findOneAndUpdate(
     { isActive: false, _id: req.params.id },
@@ -146,7 +147,7 @@ export const activeBranch = (req, res) => {
 
 export const deleteBranch = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Branch.findOneAndUpdate(
     { isActive: true, _id: req.params.id },
@@ -163,7 +164,7 @@ export const deleteBranch = (req, res) => {
 
 export const deleteBranchDeep = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Branch.findByIdAndRemove(
     req.params.id,

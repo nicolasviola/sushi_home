@@ -1,4 +1,4 @@
-import { isValidOId } from '../../helpers/types'
+import isValidOId from '../../helpers/types'
 import Product from '../../models/product'
 
 export const getAllProducts = (req, res) =>
@@ -27,7 +27,7 @@ export const getAllInactiveProducts = (req, res) =>
 
 export const getProductById = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Product.findOne(
     { _id: req.params.id, isActive: true },
@@ -86,9 +86,29 @@ export const saveProduct = (req, res) => {
 
 }
 
+export const activeProduct = (req, res) => {
+
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
+  Product.findOneAndUpdate(
+    { isActive: false, _id: req.params.id },
+    { isActive: true },
+    { new: true }
+  )
+    .populate('category', '_id name imageUrl order isVisible')
+    .exec(async (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc || !doc._id) return res.boom.notFound('Product not found')
+      return res.status(200).send({ message: 'Product active!', doc })
+
+    })
+
+}
+
 export const updateProduct = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Product.findOneAndUpdate(
     { isActive: true, _id: req.params.id },
@@ -118,29 +138,9 @@ export const updateProduct = (req, res) => {
 
 }
 
-export const activeProduct = (req, res) => {
-
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
-
-  Product.findOneAndUpdate(
-    { isActive: false, _id: req.params.id },
-    { isActive: true },
-    { new: true }
-  )
-    .populate('category', '_id name imageUrl order isVisible')
-    .exec(async (err, doc) => {
-
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc || !doc._id) return res.boom.notFound('Product not found')
-      return res.status(200).send({ message: 'Product active!', doc })
-
-    })
-
-}
-
 export const deleteProduct = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Product.findOneAndUpdate(
     { _id: req.params.id },
@@ -157,7 +157,7 @@ export const deleteProduct = (req, res) => {
 
 export const deleteProductDeep = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Product.findByIdAndRemove(
     req.params.id,

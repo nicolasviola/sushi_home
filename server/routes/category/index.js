@@ -1,24 +1,24 @@
 import express from 'express'
 import {
   getAllCategories,
-  getCategoryById,
   getAllInactiveCategories,
+  getCategoryById,
   saveCategory,
-  updateCategory,
   activeCategory,
+  updateCategory,
   deleteCategory,
-  deleteCategoryDeep,
+  // deleteCategoryDeep,
 } from './controller'
 
 const router = express.Router()
 
 router.get('/', getAllCategories)
-router.get('/:id', getCategoryById)
 router.get('/inactive/all', getAllInactiveCategories)
+router.get('/:id', getCategoryById)
 router.post('/', saveCategory)
-router.put('/:id', updateCategory)
 router.put('/active/:id', activeCategory)
+router.put('/:id', updateCategory)
 router.delete('/:id', deleteCategory)
-router.delete('/delete/:id', deleteCategoryDeep)
+// router.delete('/delete/:id', deleteCategoryDeep)
 
 export default router

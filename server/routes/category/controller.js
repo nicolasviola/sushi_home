@@ -1,4 +1,4 @@
-import { isValidOId } from '../../helpers/types'
+import isValidOId from '../../helpers/types'
 import Category from '../../models/category'
 
 export const getAllCategories = (req, res) =>
@@ -27,7 +27,7 @@ export const getAllInactiveCategories = (req, res) =>
 
 export const getCategoryById = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Category.findOne(
     { _id: req.params.id, isActive: true },
@@ -37,9 +37,10 @@ export const getCategoryById = (req, res) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
       if (!doc || !doc._id) return res.boom.notFound('Category not found')
-      return res.status(200).send({ doc: doc })
+      return res.status(200).send({ doc })
 
     })
+
 }
 
 export const saveCategory = (req, res) => {
@@ -67,9 +68,28 @@ export const saveCategory = (req, res) => {
 
 }
 
+export const activeCategory = (req, res) => {
+
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
+  Category.findOneAndUpdate(
+    { isActive: false, _id: req.params.id },
+    { isActive: true },
+    { new: true },
+    (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc || !doc._id) return res.boom.notFound('Category not found')
+      return res.status(200).send({ message: 'Category active!', doc })
+
+    }
+  )
+
+}
+
 export const updateCategory = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Category.findOneAndUpdate(
     { isActive: true, _id: req.params.id },
@@ -97,28 +117,9 @@ export const updateCategory = (req, res) => {
 
 }
 
-export const activeCategory = (req, res) => {
-
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
-
-  Category.findOneAndUpdate(
-    { isActive: false, _id: req.params.id },
-    { isActive: true },
-    { new: true },
-    (err, doc) => {
-
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc || !doc._id) return res.boom.notFound('Category not found')
-      return res.status(200).send({ message: 'Category active!', doc })
-
-    }
-  )
-
-}
-
 export const deleteCategory = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Category.findOneAndUpdate(
     { _id: req.params.id },
@@ -135,7 +136,7 @@ export const deleteCategory = (req, res) => {
 
 export const deleteCategoryDeep = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Category.findByIdAndRemove(
     req.params.id,

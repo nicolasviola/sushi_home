@@ -1,65 +1,6 @@
-import { isValidOId } from '../../helpers/types'
+import isValidOId from '../../helpers/types'
 import User from '../../models/user'
 import Order from '../../models/order'
-
-export const getUserByToken = (req, res) => {
-
-  const token = req.headers.authorization.split(' ')[1]
-  User.findOne({ token }, { isActive: 0, oldId: 0 })
-    .exec(async (err, doc) => {
-
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc || !doc._id) return res.boom.notFound('user not found')
-
-      const currentUser = {
-        _id: doc._id,
-        firstName: doc.firstName,
-        lastName: doc.lastName,
-        email: doc.email,
-        phone: doc.phone,
-        imageUrl: doc.imageUrl,
-        address: doc.address,
-        role: doc.role,
-        token: doc.token,
-        isVisible: doc.isVisible,
-      }
-
-      return res.status(200).send({ doc: currentUser })
-
-    })
-
-}
-
-export const getUserById = (req, res) => {
-
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
-
-  User.findOne(
-    { _id: req.params.id, isActive: true },
-    { isActive: 0, oldId: 0 }
-  )
-    .exec(async (err, doc) => {
-
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc || !doc._id) return res.boom.notFound('User not found')
-
-      const currentUser = {
-        _id: doc._id,
-        firstName: doc.firstName,
-        lastName: doc.lastName,
-        token: doc.token,
-        email: doc.email,
-        phone: doc.phone,
-        imageUrl: doc.imageUrl,
-        address: doc.address,
-        role: doc.role,
-        isVisible: doc.isVisible,
-      }
-      return res.status(200).send({ doc: currentUser })
-
-    })
-
-}
 
 export const getAllUsers = (req, res) => {
 
@@ -113,7 +54,7 @@ export const getRecentUsers = (req, res) => {
 
   Order.find({}, { isActive: 0, oldId: 0 })
     .populate('user', '_id itemId firstName lastName email phone address imageUrl role isVisible isActive')
-    .sort({'requestDateTime': -1})
+    .sort({ requestDateTime: -1 })
     .limit(200)
     .exec((err, doc) => {
 
@@ -128,23 +69,24 @@ export const getRecentUsers = (req, res) => {
 
 }
 
-export const putUser = (req, res) => {
+export const getUserById = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
-  User.findOneAndUpdate(
-    { isActive: true, _id: req.params.id },
-    req.body,
-    { new: true },
-    (err, doc) => {
+  User.findOne(
+    { _id: req.params.id, isActive: true },
+    { isActive: 0, oldId: 0 }
+  )
+    .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
       if (!doc || !doc._id) return res.boom.notFound('User not found')
 
-      const refreshUser = {
+      const currentUser = {
         _id: doc._id,
         firstName: doc.firstName,
         lastName: doc.lastName,
+        token: doc.token,
         email: doc.email,
         phone: doc.phone,
         imageUrl: doc.imageUrl,
@@ -152,16 +94,15 @@ export const putUser = (req, res) => {
         role: doc.role,
         isVisible: doc.isVisible,
       }
-      return res.status(200).send({ message: 'User updated!', doc: refreshUser })
+      return res.status(200).send({ doc: currentUser })
 
-    }
-  )
+    })
 
 }
 
 export const activeUser = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   User.findOneAndUpdate(
     { isActive: false, _id: req.params.id },
@@ -191,9 +132,40 @@ export const activeUser = (req, res) => {
 
 }
 
+export const putUser = (req, res) => {
+
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
+  User.findOneAndUpdate(
+    { isActive: true, _id: req.params.id },
+    req.body,
+    { new: true },
+    (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc || !doc._id) return res.boom.notFound('User not found')
+
+      const refreshUser = {
+        _id: doc._id,
+        firstName: doc.firstName,
+        lastName: doc.lastName,
+        email: doc.email,
+        phone: doc.phone,
+        imageUrl: doc.imageUrl,
+        address: doc.address,
+        role: doc.role,
+        isVisible: doc.isVisible,
+      }
+      return res.status(200).send({ message: 'User updated!', doc: refreshUser })
+
+    }
+  )
+
+}
+
 export const deleteUser = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   User.findOneAndUpdate(
     { isActive: true, _id: req.params.id },
@@ -210,7 +182,7 @@ export const deleteUser = (req, res) => {
 
 export const deleteUserDeep = (req, res) => {
 
-  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   User.findByIdAndRemove(
     req.params.id,

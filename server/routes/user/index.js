@@ -1,23 +1,21 @@
 import express from 'express'
 import {
-  // getUserByToken,
-  getUserById,
   getAllUsers,
   getAllInactiveUsers,
   getRecentUsers,
-  putUser,
+  getUserById,
   activeUser,
+  putUser,
   deleteUser,
   // deleteUserDeep,
 } from './controller'
 
 const router = express.Router()
 
-// router.get('/token', getUserByToken)
+router.get('/', getAllUsers)
 router.get('/inactive/all', getAllInactiveUsers)
 router.get('/recent', getRecentUsers)
 router.get('/:id', getUserById)
-router.get('/', getAllUsers)
 router.put('/active/:id', activeUser)
 router.put('/:id', putUser)
 router.delete('/:id', deleteUser)

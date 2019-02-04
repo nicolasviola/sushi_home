@@ -1,8 +1,8 @@
 import express from 'express'
 import {
-  getOrderById,
   getAllOrders,
   getRecentOrders,
+  getOrderById,
   saveOrder,
   refreshOrder,
   // deleteOrderDeep,
@@ -10,9 +10,9 @@ import {
 
 const router = express.Router()
 
+router.get('/', getAllOrders)
 router.get('/recent', getRecentOrders)
 router.get('/:id', getOrderById)
-router.get('/', getAllOrders)
 router.post('/', saveOrder)
 router.put('/:id', refreshOrder)
 // router.delete('/delete/:id', deleteOrderDeep)

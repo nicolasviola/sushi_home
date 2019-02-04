@@ -1,4 +1,9 @@
 import mongoose from 'mongoose'
-const ObjectId = mongoose.Types.ObjectId
 
-export const isValidOId = oid => ObjectId(oid) == oid
+const {
+  ObjectId,
+} = mongoose.Types
+
+const isValidOId = oid => ObjectId(oid) == oid
+
+export default isValidOId

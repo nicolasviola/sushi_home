@@ -91,7 +91,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Roldan\",\n  \"hours\": {\n    \"monday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"tuesday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"wednesday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"thursday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"friday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"saturday\": {\n       \"amFrom\": null,\n      \"amTo\": null,\n      \"pmFrom\": null,\n      \"pmTo\": null\n    },\n    \"sunday\": {\n      \"amFrom\": null,\n      \"amTo\": null,\n      \"pmFrom\": null,\n      \"pmTo\": null\n    }\n  },\n  \"mail\": \"info@sushihome.com.ar\",\n  \"scopeImageUrl\": \"https://bit.ly/2CIWHGJ\",\n  \"facebook\": \"https://www.facebook.com/SushiHomeArg\",\n  \"instagram\": \"https://instagram.com/sushihome_arg\",\n  \"twiter\": \"https://twitter.com/sushihomearg\",\n  \"deliveryPrice\": 30,\n  \"addres\": null,\n  \"phone\": \"08004447677\",\n  \"isOpen\": true,\n  \"isVisible\": true,\n  \"isActive\": true\n}"
+							"raw": "{\n  \"name\": \"Nicaragua\",\n  \"hours\": {\n    \"monday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"tuesday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"wednesday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"thursday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"friday\": {\n      \"amFrom\": \"10:00\",\n      \"amTo\": \"14:00\",\n      \"pmFrom\": \"19:00\",\n      \"pmTo\": \"23:00\"\n    },\n    \"saturday\": {\n       \"amFrom\": null,\n      \"amTo\": null,\n      \"pmFrom\": null,\n      \"pmTo\": null\n    },\n    \"sunday\": {\n      \"amFrom\": null,\n      \"amTo\": null,\n      \"pmFrom\": null,\n      \"pmTo\": null\n    }\n  },\n  \"mail\": \"info@sushihome.com.ar\",\n  \"scopeImageUrl\": \"https://bit.ly/2CIWHGJ\",\n  \"facebook\": \"https://www.facebook.com/SushiHomeArg\",\n  \"instagram\": \"https://instagram.com/sushihome_arg\",\n  \"twiter\": \"https://twitter.com/sushihomearg\",\n  \"deliveryPrice\": 30,\n  \"addres\": null,\n  \"phone\": \"08004447677\",\n  \"isOpen\": true,\n  \"isVisible\": true,\n  \"isActive\": true\n}"
 						},
 						"url": {
 							"raw": "{{host}}/api/branch",
@@ -200,7 +200,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/branch/delete/5c4a0d671c06f6dd765939e7",
+							"raw": "{{host}}/api/branch/delete/5c5851437bf3e44657b5f1b0",
 							"host": [
 								"{{host}}"
 							],
@@ -208,7 +208,7 @@
 								"api",
 								"branch",
 								"delete",
-								"5c4a0d671c06f6dd765939e7"
+								"5c5851437bf3e44657b5f1b0"
 							]
 						}
 					},
@@ -489,7 +489,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"userId\": \"5c5074abb914c058595a8961\",\n  \"branchId\": \"5c5074abb914c058595a895f\",\n  \"products\": [\n    {\n      \"product\": \"5c5074ccb914c058595abdca\",\n      \"price\": 130,\n      \"ammount\": 2\n    },\n    {\n      \"product\": \"5c5074ccb914c058595abdc9\",\n      \"price\": 130,\n      \"ammount\": 4\n    },\n    {\n      \"product\": \"5c5074ccb914c058595abdcc\",\n      \"price\": 130,\n      \"ammount\": 1\n    }\n  ],\n  \"requestDateTime\": \"28/01/2019 - 11:30\",\n  \"selectedTime\": \"28/01/2019 - 22:30\",\n  \"confirmedTime\": \"28/01/2019 - 22:30\",\n  \"deliveredTime\": \"28/01/2019 - 22:30\",\n  \"deliveryPrice\": 30,\n  \"deliveryAddress\": \"Santa Fe 1240\",\n  \"clientPhoneAdd\": \"0303456792\",\n  \"clientPhone\": \"0303456790\",\n  \"clientsComments\": \"Por favor traer servilletas\",\n  \"adminComments\": null\n}"
+							"raw": "{\n  \"user\": \"5c5137bacbaf84092cbc7898\",\n  \"branch\": \"5c5137bacbaf84092cbc788f\",\n  \"products\": [\n    {\n      \"product\": \"5c51380bcbaf84092cbcacfc\",\n      \"price\": 130,\n      \"ammount\": 2\n    },\n    {\n      \"product\": \"5c51380bcbaf84092cbcacfd\",\n      \"price\": 130,\n      \"ammount\": 4\n    },\n    {\n      \"product\": \"5c51380bcbaf84092cbcad00\",\n      \"price\": 130,\n      \"ammount\": 1\n    }\n  ],\n  \"requestDateTime\": \"28/01/2019 - 11:30\",\n  \"selectedTime\": \"28/01/2019 - 22:30\",\n  \"confirmedTime\": \"28/01/2019 - 22:30\",\n  \"deliveredTime\": \"28/01/2019 - 22:30\",\n  \"deliveryPrice\": 30,\n  \"deliveryAddress\": \"Santa Fe 1240\",\n  \"clientPhoneAdd\": \"0303456792\",\n  \"clientPhone\": \"0303456790\",\n  \"clientsComments\": \"Por favor traer servilletas\",\n  \"adminComments\": null\n}"
 						},
 						"url": {
 							"raw": "{{host}}/api/order",
@@ -521,14 +521,14 @@
 							"raw": "{\n\t\"products\": [\n\t  \t{\n\t      \"productId\": \"5c5074ccb914c058595abdca\",\n\t      \"price\": 180,\n\t      \"ammount\": 5\n\t    }\n\t]\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/order/5c508b27856c4d50c16d75a6",
+							"raw": "{{host}}/api/order/5c56015a16e2ba43f561da57",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"order",
-								"5c508b27856c4d50c16d75a6"
+								"5c56015a16e2ba43f561da57"
 							]
 						}
 					},
@@ -556,31 +556,6 @@
 							"path": [
 								"api",
 								"product"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET PRODUCT BY CATEGORY ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/product/by/category/5c49d69194a1e8ca48d9c923",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"product",
-								"by",
-								"category",
-								"5c49d69194a1e8ca48d9c923"
 							]
 						}
 					},
@@ -647,7 +622,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"categoryId\": \"5c49d69194a1e8ca48d9c923\",\n  \"name\": \"Batata\",\n  \"description\": \"Este es muy rico también\",\n  \"units\": 5,\n  \"price\": 130,\n  \"imageUrl\": \"https://bit.ly/2CIWHGJ\",\n  \"isVisible\": true\n}"
+							"raw": "{\n  \"category\": \"5c51380acbaf84092cbcacf1\",\n  \"name\": \"Batatota\",\n  \"description\": \"Este es muy rico también\",\n  \"units\": 5,\n  \"price\": 130,\n  \"imageUrl\": \"https://bit.ly/2CIWHGJ\",\n  \"isVisible\": true\n}"
 						},
 						"url": {
 							"raw": "{{host}}/api/product",
@@ -676,17 +651,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Rabas\"\n}"
+							"raw": "{\n  \"name\": \"Papota\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/product/5c4a1c5459e06ce1d1052039",
+							"raw": "{{host}}/api/product/5c55f5e8117a473f73a49cbe",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"product",
-								"5c4a1c5459e06ce1d1052039"
+								"5c55f5e8117a473f73a49cbe"
 							]
 						}
 					},
@@ -756,7 +731,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/product/delete/5c49e80c6baba5d1dfc7a3ba",
+							"raw": "{{host}}/api/product/delete/5c5851b432b96e4686664cc9",
 							"host": [
 								"{{host}}"
 							],
@@ -764,7 +739,7 @@
 								"api",
 								"product",
 								"delete",
-								"5c49e80c6baba5d1dfc7a3ba"
+								"5c5851b432b96e4686664cc9"
 							]
 						}
 					},
@@ -1036,6 +1011,126 @@
 								"api",
 								"auth",
 								"signIn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FORGOT PASSWORD",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"esteban.frare@radiumrocket.com\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/auth/forgotPassword",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RESET PASSWORD",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"esteban.frare@radiumrocket.com\",\n  \"currentPassword\": \"55455af881e0c6b\",\n  \"newPassword\": \"NuevaContraseña10\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/auth/resetPassword",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGOUT",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"esteban.frare@radiumrocket.com\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/auth/logout",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SERVER STATUS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"esteban.frare@radiumrocket.com\",\n  \"password\": \"miContraseña8\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/auth/serverStatus",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"serverStatus"
 							]
 						}
 					},
