@@ -10,7 +10,7 @@ const server = express()
 const port = config.PORT
 const uri = config.MLAB_MONGO_DB
 
-mongoose.connect(uri)
+mongoose.connect(uri, { useNewUrlParser: true })
 
 server.use(boom())
 server.use(bodyParser.urlencoded({ extended: true }))

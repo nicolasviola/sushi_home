@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "dev": "nodemon --exec npm run babel-node -- ./server/index.js",
+    "dev": "source ./sendgrid.env && nodemon --exec npm run babel-node -- ./server/index.js",
     "babel-node": "babel-node --presets=es2015,stage-3",
     "start": "node ./dist",
     "build": "rimraf dist/ && babel ./server --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.49",
+    "@sendgrid/mail": "^6.3.1",
     "babel-eslint": "^8.2.3",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",

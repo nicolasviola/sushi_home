@@ -1,5 +1,6 @@
 import sha256 from 'sha256'
 import moment from 'moment'
+import sgMail from '@sendgrid/mail'
 import User from '../../models/user'
 import createToken from '../../helpers/services'
 
@@ -105,6 +106,22 @@ export const forgotPassword = (req, res) => {
       if (err) return res.boom.badImplementation('', { error: err })
       if (doc) {
 
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+        const msg = {
+          to: req.body.email,
+          from: 'info@sushihomearg.com',
+          subject: 'Sushi Home - Nueva contraseña',
+          text: `Gracias por contactarnos! Tu nueva contraseña es: newPassword ${newPassword}. `,
+          html: '<div>'
+          + '<h1>Gracias por contactarnos!</h1>'
+          + '<h3>Tu nueva contraseña es: </h3>'
+          + `<h2>${newPassword}</h2>`
+          + '<p>Ingresa a nuestra web para personalizarla: </p>'
+          + '<a href="http://sushihomearg.com/">http://sushihomearg.com/</a>'
+          + '</div>',
+        }
+        sgMail.send(msg)
+
         return res.status(200).send({ status: 'OK' })
 
       }
@@ -113,8 +130,6 @@ export const forgotPassword = (req, res) => {
 
     }
   )
-  // enviar la nueva contraseña por mail
-  // sengrid para emails
 
 }
 
