@@ -1,3 +1,4 @@
+import { isValidOId } from '../../helpers/types'
 import Product from '../../models/product'
 
 export const getAllProducts = (req, res) =>
@@ -24,7 +25,9 @@ export const getAllInactiveProducts = (req, res) =>
 
     })
 
-export const getProductById = (req, res) =>
+export const getProductById = (req, res) => {
+
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Product.findOne(
     { _id: req.params.id, isActive: true },
@@ -39,6 +42,7 @@ export const getProductById = (req, res) =>
 
     })
 
+}
 export const saveProduct = (req, res) => {
 
   const product = new Product()
@@ -59,21 +63,21 @@ export const saveProduct = (req, res) => {
       { isActive: 0, oldId: 0 }
     )
       .populate('category', '_id name imageUrl order isVisible')
-      .exec(async (err, docu) => {
-
-        const newProduct = {
-          _id: docu._id,
-          name: docu.name,
-          category: docu.category,
-          description: docu.description,
-          units: docu.units,
-          price: docu.price,
-          imageUrl: docu.imageUrl,
-          isVisible: docu.isVisible,
-        }
+      .exec(async (err, doc) => {
 
         if (err) return res.boom.badImplementation('', { error: err })
-        if (!docu) return res.boom.badImplementation('', { error })
+        if (!doc) return res.boom.badImplementation('', { error })
+
+        const newProduct = {
+          _id: doc._id,
+          name: doc.name,
+          category: doc.category,
+          description: doc.description,
+          units: doc.units,
+          price: doc.price,
+          imageUrl: doc.imageUrl,
+          isVisible: doc.isVisible,
+        }
         return res.status(200).send({ message: 'Product created', doc: newProduct })
 
       })
@@ -84,6 +88,8 @@ export const saveProduct = (req, res) => {
 
 export const updateProduct = (req, res) => {
 
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
   Product.findOneAndUpdate(
     { isActive: true, _id: req.params.id },
     req.body,
@@ -91,6 +97,9 @@ export const updateProduct = (req, res) => {
   )
     .populate('category', '_id name imageUrl order isVisible')
     .exec(async (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc || !doc._id) return res.boom.notFound('Product not found')
 
       const refreshProduct = {
         _id: doc._id,
@@ -103,9 +112,6 @@ export const updateProduct = (req, res) => {
         isVisible: doc.isVisible,
         isActive: true,
       }
-
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Product not found')
       return res.status(200).send({ message: 'Product updated!', doc: refreshProduct })
 
     })
@@ -113,6 +119,8 @@ export const updateProduct = (req, res) => {
 }
 
 export const activeProduct = (req, res) => {
+
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Product.findOneAndUpdate(
     { isActive: false, _id: req.params.id },
@@ -123,7 +131,7 @@ export const activeProduct = (req, res) => {
     .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Product not found')
+      if (!doc || !doc._id) return res.boom.notFound('Product not found')
       return res.status(200).send({ message: 'Product active!', doc })
 
     })
@@ -131,6 +139,8 @@ export const activeProduct = (req, res) => {
 }
 
 export const deleteProduct = (req, res) => {
+
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Product.findOneAndUpdate(
     { _id: req.params.id },
@@ -147,12 +157,14 @@ export const deleteProduct = (req, res) => {
 
 export const deleteProductDeep = (req, res) => {
 
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
   Product.findByIdAndRemove(
     req.params.id,
     (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Product not found')
+      if (!doc || !doc._id) return res.boom.notFound('Product not found')
       return res.status(200).send({ message: 'Product deep removed!' })
 
     }

@@ -1,3 +1,4 @@
+import { isValidOId } from '../../helpers/types'
 import Branch from '../../models/branch'
 
 export const getAllBranches = (req, res) =>
@@ -24,7 +25,9 @@ export const getAllInactiveBranches = (req, res) =>
 
     })
 
-export const getBranchesById = (req, res) =>
+export const getBranchesById = (req, res) => {
+
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Branch.findOne(
     { _id: req.params.id, isActive: true },
@@ -33,10 +36,11 @@ export const getBranchesById = (req, res) =>
     .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Branch not found')
+      if (!doc || !doc._id) return res.boom.notFound('Branch not found')
       return res.status(200).send({ doc })
 
     })
+}
 
 export const saveBranch = (req, res) => {
 
@@ -88,11 +92,16 @@ export const saveBranch = (req, res) => {
 
 export const updateBranch = (req, res) => {
 
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
   Branch.findOneAndUpdate(
     { isActive: true, _id: req.params.id },
     req.body,
     { new: true },
     (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc || !doc._id) return res.boom.notFound('Branch not found')
 
       const refreshBranch = {
         _id: doc._id,
@@ -109,9 +118,6 @@ export const updateBranch = (req, res) => {
         isOpen: doc.isOpen,
         isVisible: doc.isVisible,
       }
-
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Branch not found')
       return res.status(200).send({ message: 'Branch updated!', doc: refreshBranch })
 
     }
@@ -121,6 +127,8 @@ export const updateBranch = (req, res) => {
 
 export const activeBranch = (req, res) => {
 
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
   Branch.findOneAndUpdate(
     { isActive: false, _id: req.params.id },
     { isActive: true },
@@ -128,7 +136,7 @@ export const activeBranch = (req, res) => {
     (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Branch not found')
+      if (!doc || !doc._id) return res.boom.notFound('Branch not found')
       return res.status(200).send({ message: 'Branch active!', doc })
 
     }
@@ -137,6 +145,8 @@ export const activeBranch = (req, res) => {
 }
 
 export const deleteBranch = (req, res) => {
+
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Branch.findOneAndUpdate(
     { isActive: true, _id: req.params.id },
@@ -153,12 +163,14 @@ export const deleteBranch = (req, res) => {
 
 export const deleteBranchDeep = (req, res) => {
 
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
   Branch.findByIdAndRemove(
     req.params.id,
     (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Branch not found')
+      if (!doc || !doc._id) return res.boom.notFound('Branch not found')
       return res.status(200).send({ message: 'Branch deep removed!' })
 
     }

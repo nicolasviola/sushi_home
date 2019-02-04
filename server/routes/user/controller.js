@@ -1,3 +1,4 @@
+import { isValidOId } from '../../helpers/types'
 import User from '../../models/user'
 import Order from '../../models/order'
 
@@ -7,6 +8,9 @@ export const getUserByToken = (req, res) => {
   User.findOne({ token }, { isActive: 0, oldId: 0 })
     .exec(async (err, doc) => {
 
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc || !doc._id) return res.boom.notFound('user not found')
+
       const currentUser = {
         _id: doc._id,
         firstName: doc.firstName,
@@ -20,8 +24,6 @@ export const getUserByToken = (req, res) => {
         isVisible: doc.isVisible,
       }
 
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('user not found')
       return res.status(200).send({ doc: currentUser })
 
     })
@@ -30,11 +32,16 @@ export const getUserByToken = (req, res) => {
 
 export const getUserById = (req, res) => {
 
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
   User.findOne(
     { _id: req.params.id, isActive: true },
     { isActive: 0, oldId: 0 }
   )
     .exec(async (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc || !doc._id) return res.boom.notFound('User not found')
 
       const currentUser = {
         _id: doc._id,
@@ -48,9 +55,6 @@ export const getUserById = (req, res) => {
         role: doc.role,
         isVisible: doc.isVisible,
       }
-
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('User not found')
       return res.status(200).send({ doc: currentUser })
 
     })
@@ -101,7 +105,6 @@ export const getAllInactiveUsers = (req, res) => {
       if (!doc) return res.boom.notFound('Users not found')
       return res.status(200).send({ doc })
 
-
     })
 
 }
@@ -109,15 +112,16 @@ export const getAllInactiveUsers = (req, res) => {
 export const getRecentUsers = (req, res) => {
 
   Order.find({}, { isActive: 0, oldId: 0 })
+    .populate('user', '_id itemId firstName lastName email phone address imageUrl role isVisible isActive')
     .sort({'requestDateTime': -1})
     .limit(200)
-    .populate('user', '_id itemId firstName lastName email phone address imageUrl role isVisible isActive')
-    .exec(async (err, doc) => {
+    .exec((err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
       if (!doc) return res.boom.notFound('Orders not found')
-      const users = doc.map(item => item.user).slice(0,100)
-
+      const users = doc.filter(item => item.user)
+        .map(item => item.user)
+        .slice(0, 100)
       return res.status(200).send({ doc: users })
 
     })
@@ -126,11 +130,16 @@ export const getRecentUsers = (req, res) => {
 
 export const putUser = (req, res) => {
 
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
   User.findOneAndUpdate(
     { isActive: true, _id: req.params.id },
     req.body,
     { new: true },
     (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc || !doc._id) return res.boom.notFound('User not found')
 
       const refreshUser = {
         _id: doc._id,
@@ -143,9 +152,6 @@ export const putUser = (req, res) => {
         role: doc.role,
         isVisible: doc.isVisible,
       }
-
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('User not found')
       return res.status(200).send({ message: 'User updated!', doc: refreshUser })
 
     }
@@ -155,11 +161,16 @@ export const putUser = (req, res) => {
 
 export const activeUser = (req, res) => {
 
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
   User.findOneAndUpdate(
     { isActive: false, _id: req.params.id },
     { isActive: true },
     { new: true },
     (err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc || !doc._id) return res.boom.notFound('User not found')
 
       const refreshUser = {
         _id: doc._id,
@@ -173,9 +184,6 @@ export const activeUser = (req, res) => {
         isVisible: doc.isVisible,
         isActive: doc.isActive,
       }
-
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('User not found')
       return res.status(200).send({ message: 'User active!', doc: refreshUser })
 
     }
@@ -184,6 +192,8 @@ export const activeUser = (req, res) => {
 }
 
 export const deleteUser = (req, res) => {
+
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   User.findOneAndUpdate(
     { isActive: true, _id: req.params.id },
@@ -200,12 +210,14 @@ export const deleteUser = (req, res) => {
 
 export const deleteUserDeep = (req, res) => {
 
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
   User.findByIdAndRemove(
     req.params.id,
     (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('User not found')
+      if (!doc || !doc._id) return res.boom.notFound('User not found')
       return res.status(200).send({ message: 'User deep removed!' })
 
     }

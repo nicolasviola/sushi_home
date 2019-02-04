@@ -1,6 +1,9 @@
+import { isValidOId } from '../../helpers/types'
 import Order from '../../models/order'
 
 export const getOrderById = (req, res) => {
+
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Order.findOne(
     { _id: req.params.id },
@@ -15,7 +18,7 @@ export const getOrderById = (req, res) => {
     .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Order not found')
+      if (!doc || !doc._id) return res.boom.notFound('Order not found')
       return res.status(200).send({ doc })
 
     })
@@ -45,20 +48,20 @@ export const getAllOrders = (req, res) => {
 export const getRecentOrders = (req, res) => {
 
   Order.find({}, { isActive: 0, oldId: 0 })
-    .sort({'requestDateTime': -1})
-    .limit(100)
     .populate('user', '_id firstName lastName email phone address imageUrl role dateAdded isVisible')
     .populate(
       'branch',
       '_id hours name email scopeImageUrl facebook instagram twiter deliveryPrice address phone isOpen isVisible'
     )
     .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
+    .sort({'requestDateTime': -1})
+    .limit(100)
     .exec(async (err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
       if (!doc) return res.boom.notFound('Orders not found')
 
-      return res.status(200).send({ doc })
+      return res.status(200).send({ doc: doc.filter(item => item.user) })
 
     })
 
@@ -96,28 +99,28 @@ export const saveOrder = (req, res) => {
         '_id hours name email scopeImageUrl facebook instagram twiter deliveryPrice address phone isOpen isVisible'
       )
       .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
-      .exec(async (err, docu) => {
-
-        const newOrder = {
-          _id: docu._id,
-          user: docu.user,
-          branch: docu.branch,
-          products: docu.products,
-          requestDateTime: docu.requestDateTime,
-          selectedTime: docu.selectedTime,
-          confirmedTime: docu.confirmedTime,
-          deliveredTime: docu.deliveredTime,
-          isCanceled: docu.isCanceled,
-          deliveryPrice: docu.deliveryPrice,
-          deliveryAddress: docu.deliveryAddress,
-          clientPhoneAdd: docu.clientPhoneAdd,
-          clientPhone: docu.clientPhone,
-          clientsComments: docu.clientsComments,
-          adminComments: docu.adminComments,
-        }
+      .exec(async (err, doc) => {
 
         if (err) return res.boom.badImplementation('', { err })
-        if (!docu) return res.boom.badImplementation('', { error })
+        if (!doc || !doc._id) return res.boom.badImplementation('', { error })
+
+        const newOrder = {
+          _id: doc._id,
+          user: doc.user,
+          branch: doc.branch,
+          products: doc.products,
+          requestDateTime: doc.requestDateTime,
+          selectedTime: doc.selectedTime,
+          confirmedTime: doc.confirmedTime,
+          deliveredTime: doc.deliveredTime,
+          isCanceled: doc.isCanceled,
+          deliveryPrice: doc.deliveryPrice,
+          deliveryAddress: doc.deliveryAddress,
+          clientPhoneAdd: doc.clientPhoneAdd,
+          clientPhone: doc.clientPhone,
+          clientsComments: doc.clientsComments,
+          adminComments: doc.adminComments,
+        }
         return res.status(200).send({ message: 'Order created', doc: newOrder })
 
       })
@@ -127,6 +130,8 @@ export const saveOrder = (req, res) => {
 }
 
 export const refreshOrder = (req, res) => {
+
+  if(!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
 
   Order.findOneAndUpdate(
     { isActive: true, _id: req.params.id },
@@ -142,7 +147,7 @@ export const refreshOrder = (req, res) => {
     .exec((err, doc) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Order not found')
+      if (!doc || !doc._id) return res.boom.notFound('Order not found')
       return res.status(200).send({ message: 'Order updated!', doc })
 
     })
@@ -150,13 +155,15 @@ export const refreshOrder = (req, res) => {
 }
 
 // export const deleteOrderDeep = (req, res) => {
+//
+// !  if(isValidOId(req.params.id)) //     return res.boom.badRequest('Invalid Id')
 
 //   Order.findByIdAndRemove(
 //     req.params.id,
 //     (err, doc) => {
 
 //       if (err) return res.boom.badImplementation('', { error: err })
-//       if (!doc) return res.boom.notFound('Order not found')
+//       if (!doc || !doc._id) return res.boom.notFound('Order not found')
 //       return res.status(200).send({ message: 'Order deep removed!' })
 
 //     }
