@@ -4,25 +4,63 @@ import Order from '../../models/order'
 
 export const getAllUsers = (req, res) => {
 
-  User.find({ isActive: true }, {
-    itemId: 1,
-    firstName: 1,
-    lastName: 1,
-    email: 1,
-    phone: 1,
-    address: 1,
-    imageUrl: 1,
-    role: 1,
-    isVisible: 1,
-    token: 1,
-  })
-    .exec(async (err, doc) => {
+  if (Object.keys(req.query).length > 0) {
 
-      if (err) return res.boom.badImplementation('', { error: err })
-      if (!doc) return res.boom.notFound('Users not found')
-      return res.status(200).send({ doc })
+    User.find(
+      {
+        isActive: true,
+        $or:
+          [
+            { firstName: { $regex: req.query.search, $options: 'i' } },
+            { lastName: { $regex: req.query.search, $options: 'i' } },
+          ],
+      },
+      {
+        itemId: 1,
+        firstName: 1,
+        lastName: 1,
+        email: 1,
+        phone: 1,
+        address: 1,
+        imageUrl: 1,
+        role: 1,
+        isVisible: 1,
+        token: 1,
+      }
+    )
+      .exec(async (err, doc) => {
 
+        if (err) return res.boom.badImplementation('', { error: err })
+        if (!doc) return res.boom.notFound('Users not found')
+        return res.status(200).send({ doc })
+
+      })
+
+  }
+
+  else {
+
+    User.find({ isActive: true }, {
+      itemId: 1,
+      firstName: 1,
+      lastName: 1,
+      email: 1,
+      phone: 1,
+      address: 1,
+      imageUrl: 1,
+      role: 1,
+      isVisible: 1,
+      token: 1,
     })
+      .exec(async (err, doc) => {
+
+        if (err) return res.boom.badImplementation('', { error: err })
+        if (!doc) return res.boom.notFound('Users not found')
+        return res.status(200).send({ doc })
+
+      })
+
+  }
 
 }
 
