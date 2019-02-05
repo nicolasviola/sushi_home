@@ -1,3 +1,4 @@
+import { uniqBy } from 'lodash'
 import isValidOId from '../../helpers/types'
 import User from '../../models/user'
 import Order from '../../models/order'
@@ -98,7 +99,8 @@ export const getRecentUsers = (req, res) => {
 
       if (err) return res.boom.badImplementation('', { error: err })
       if (!doc) return res.boom.notFound('Orders not found')
-      const users = doc.filter(item => item.user)
+      const users = uniqBy(doc, 'user._id' )
+        .filter(item => item.user)
         .map(item => item.user)
         .slice(0, 100)
       return res.status(200).send({ doc: users })
