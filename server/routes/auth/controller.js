@@ -24,8 +24,8 @@ export const signUp = (req, res) => {
         user.lastName = req.body.lastName
         user.phone = req.body.phone
         user.address = req.body.address
-        user.imageUrl = req.body.imageUrl
-        user.role = req.body.role
+        user.imageUrl = ''
+        user.role = 'client'
         user.dateAdded = moment()
         user.isVisible = true
         user.isActive = true
