@@ -751,29 +751,6 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "GET USER BY TOKEN",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/user/token",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"token"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "GET ALL USERS",
 					"request": {
 						"method": "GET",
@@ -797,6 +774,35 @@
 					"response": []
 				},
 				{
+					"name": "GET ALL USERS BY SEARCH",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/user/?search=nicolas",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"user",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "nicolas"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GET USER BY ID",
 					"request": {
 						"method": "GET",
@@ -806,14 +812,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/user/5c535d46f6ec6c12b647e4f6",
+							"raw": "{{host}}/api/user/5c5137bacbaf84092cbc78b4",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"user",
-								"5c535d46f6ec6c12b647e4f6"
+								"5c5137bacbaf84092cbc78b4"
 							]
 						}
 					},
@@ -970,7 +976,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"firstName\": \"Rosana\",\n  \"lastName\": \"Buzzone\",\n  \"email\": \"rosana.buzzone@radiumrocket.com\",\n  \"password\": \"miContraseña10\",\n  \"phone\": \"0303456710\",\n  \"addres\": \"Santa Fe 180\",\n  \"imageUrl\": \"https://bit.ly/2DFA4F8\",\n  \"role\": \"client\"\n}"
+							"raw": "{\n  \"firstName\": \"Nicolas\",\n  \"lastName\": \"Viola\",\n  \"email\": \"naav02@gmail.com\",\n  \"password\": \"miContraseña10\",\n  \"phone\": \"0303456710\",\n  \"addres\": \"Santa Fe 180\",\n  \"imageUrl\": \"https://bit.ly/2DFA4F8\",\n  \"role\": \"client\"\n}"
 						},
 						"url": {
 							"raw": "{{host}}/api/auth/signUp",
@@ -1030,7 +1036,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"esteban.frare@radiumrocket.com\"\n}"
+							"raw": "{\n  \"email\": \"naav02@gmail.com\"\n}"
 						},
 						"url": {
 							"raw": "{{host}}/api/auth/forgotPassword",
