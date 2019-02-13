@@ -129,6 +129,79 @@ export const saveOrder = (req, res) => {
 
 }
 
+export const confirmOrder = (req, res) => {
+
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
+  Order.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: { confirmedTime: req.body.confirmedTime || '' }},
+  )
+    .populate('user', '_id firstName lastName email phone address imageUrl role dateAdded isVisible')
+    .populate(
+      'branch',
+      '_id hours name email scopeImageUrl facebook instagram twiter deliveryPrice address phone isOpen isVisible'
+    )
+    .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
+    .exec((err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc || !doc._id) return res.boom.notFound('Order not found')
+      return res.status(200).send({ message: 'Order confirmed!', doc })
+
+    })
+
+}
+
+
+export const deliverOrder = (req, res) => {
+
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
+  Order.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: { deliveredTime: req.body.deliveredTime || '' }},
+  )
+    .populate('user', '_id firstName lastName email phone address imageUrl role dateAdded isVisible')
+    .populate(
+      'branch',
+      '_id hours name email scopeImageUrl facebook instagram twiter deliveryPrice address phone isOpen isVisible'
+    )
+    .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
+    .exec((err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc || !doc._id) return res.boom.notFound('Order not found')
+      return res.status(200).send({ message: 'Order delivered!', doc })
+
+    })
+
+}
+
+export const cancelOrder = (req, res) => {
+
+  if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
+
+  Order.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: { isCanceled: true }},
+  )
+    .populate('user', '_id firstName lastName email phone address imageUrl role dateAdded isVisible')
+    .populate(
+      'branch',
+      '_id hours name email scopeImageUrl facebook instagram twiter deliveryPrice address phone isOpen isVisible'
+    )
+    .populate('products.product', '_id itemId categoryId name description units price imageUrl isVisible')
+    .exec((err, doc) => {
+
+      if (err) return res.boom.badImplementation('', { error: err })
+      if (!doc || !doc._id) return res.boom.notFound('Order not found')
+      return res.status(200).send({ message: 'Order canceled!', doc })
+
+    })
+
+}
+
 export const refreshOrder = (req, res) => {
 
   if (!isValidOId(req.params.id)) return res.boom.badRequest('Invalid Id')
