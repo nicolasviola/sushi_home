@@ -14,7 +14,7 @@ router.post('/signUp', signUp)
 router.post('/signIn', signIn)
 router.put('/forgotPassword', forgotPassword)
 router.put('/resetPassword', resetPassword)
-router.delete('/logout', logout)
+router.delete('/logout/:id', logout)
 router.post('/serverStatus', serverStatus)
 
 export default router

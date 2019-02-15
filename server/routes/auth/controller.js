@@ -2,6 +2,7 @@ import sha256 from 'sha256'
 import moment from 'moment'
 import sgMail from '@sendgrid/mail'
 import User from '../../models/user'
+import isValidOId from '../../helpers/types'
 import createToken from '../../helpers/services'
 
 export const signUp = (req, res) => {
@@ -156,8 +157,11 @@ export const resetPassword = (req, res) => {
 
 export const logout = (req, res) => {
 
+  if (!isValidOId(req.params.id))
+    return res.boom.badRequest('Invalid Id')
+
   User.findOneAndUpdate(
-    { email: req.body.email },
+    { _id: req.params.id },
     { token: null },
     (err, doc) => {
 
