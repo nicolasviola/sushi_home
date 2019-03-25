@@ -15,8 +15,11 @@ npm run build
 # Add your MongoDB Atlas connection string to MLAB_MONGO_DB env var
 echo 'export MLAB_MONGO_DB="mongodb+srv://user:pass@proj.mongodb.net/dbname?retryWrites=true"' >> ~/.bash_profile
 
+# Add API_PORT env var if necessary
+echo 'export API_PORT=5000' >> ~/.bash_profile
+
 # Serve production server
-NODE_ENV=production API_PORT=5000 npm start
+npm start
 ```
 
 The server should start at http://localhost:5000/.
