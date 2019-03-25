@@ -7,7 +7,7 @@ import router from './routes'
 import config from './env'
 
 const server = express()
-const port = config.PORT
+const port = config.API_PORT
 const uri = config.MLAB_MONGO_DB
 
 mongoose.connect(uri, { useNewUrlParser: true })

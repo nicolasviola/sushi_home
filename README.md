@@ -16,7 +16,7 @@ npm run build
 echo 'export MLAB_MONGO_DB="mongodb+srv://user:pass@proj.mongodb.net/dbname?retryWrites=true"' >> ~/.bash_profile
 
 # Serve production server
-NODE_ENV=production PORT=8000 npm start
+NODE_ENV=production API_PORT=5000 npm start
 ```
 
 The server should start at http://localhost:5000/.
